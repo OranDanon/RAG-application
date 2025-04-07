@@ -185,6 +185,7 @@ The system uses Docling's HybridChunker which:
   - Implement contextual_rag
   - Graph RAG, Light RAG, Path RAG (for more advanced relations: cross documents Q&A)
 - Enhance evaluation with the 100 Q&A dataset to measure system performance: E.g. use rubrics to test generation
+- Such tests may help to evaluate if using prebuilt chains, e.g., `langchain.chains` will be beneficial or not.
 
 ## Evaluation
 
