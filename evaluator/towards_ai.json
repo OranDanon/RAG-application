@@ -1,0 +1,877 @@
+{
+  "questions": [
+    {
+      "id": "intro-easy-fact-tech-01",
+      "section": "Project Management Problems and AI Solutions",
+      "question": "What are the three core challenges of project management mentioned in the article?",
+      "context": "Managing projects can sometimes feel overwhelming, like solving a complex puzzle under pressure. Here are the core challenges: - Information Overload: Project management involves a massive amount of emails, documents, and meeting notes, and finding the right information at the right time can be very challenging. - Inefficient Task Creation: Manually creating and prioritizing tasks is very time-consuming and may lead to errors. - Team Coordination Issues: Assigning tasks effectively depends heavily on the team members' skills and availability.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "intro-easy-desc-conc-01",
+      "section": "Project Management Problems and AI Solutions",
+      "question": "How does the AI solution described in the article address information overload in project management?",
+      "context": "Imagine a system that: - Automatically generates and prioritizes tasks using AI insights and historical data. - Enhances team collaboration by suggesting the best people for each task. - Adapts workflows on the fly, handling changes smoothly. - Gives you practical insights through clear, straightforward reports.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "intro-med-fact-tech-01",
+      "section": "Project Management Problems and AI Solutions",
+      "question": "What problems can result from the challenges in project management according to the article?",
+      "context": "These difficulties can lead to missed deadlines, blown budgets, and burned-out teams.",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "intro-hard-desc-comp-01",
+      "section": "Project Management Problems and AI Solutions",
+      "question": "How does the AI-driven approach to project management differ from traditional methods in terms of addressing information overload?",
+      "context": "Information Overload: Project management involves a massive amount of emails, documents, and meeting notes, and finding the right information at the right time can be very challenging. [...] Imagine a system that: - Automatically generates and prioritizes tasks using AI insights and historical data. - Enhances team collaboration by suggesting the best people for each task. - Adapts workflows on the fly, handling changes smoothly. - Gives you practical insights through clear, straightforward reports.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "intro-hard-proc-tech-01",
+      "section": "Project Management Problems and AI Solutions",
+      "question": "How might a project manager implement the AI system described to address all three core challenges simultaneously?",
+      "context": "Managing projects can sometimes feel overwhelming, like solving a complex puzzle under pressure. Here are the core challenges: - Information Overload: Project management involves a massive amount of emails, documents, and meeting notes, and finding the right information at the right time can be very challenging. - Inefficient Task Creation: Manually creating and prioritizing tasks is very time-consuming and may lead to errors. - Team Coordination Issues: Assigning tasks effectively depends heavily on the team members' skills and availability. [...] Imagine a system that: - Automatically generates and prioritizes tasks using AI insights and historical data. - Enhances team collaboration by suggesting the best people for each task. - Adapts workflows on the fly, handling changes smoothly. - Gives you practical insights through clear, straightforward reports.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "taskagent-easy-fact-tech-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "What AI model is initialized in the TaskAgent code example?",
+      "context": "AI Model Initialization: The ChatGroq model is configured with parameters like temperature and max tokens to control the output.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "taskagent-easy-desc-conc-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "What is the purpose of the TaskAgent in the project management system?",
+      "context": "The TaskAgent automates this process by: - Leveraging AI: Uses a language model to generate tasks based on project descriptions. - Utilizing Historical Data: Considers similar tasks from past projects to ensure nothing is overlooked. - Incorporating Team Skills: Aligns tasks with the available skills within the team.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "taskagent-med-fact-tech-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "What are the four steps in the TaskAgent's create_task method?",
+      "context": "# Step 1: Retrieve similar tasks and project context [...] # Step 2: Prepare the prompt for the AI model [...] # Step 3: Generate the task using the AI model [...] # Step 4: Return the task details",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "taskagent-med-proc-tech-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "How would you initialize and use the TaskAgent to create a new task for a payment gateway integration?",
+      "context": "Using the TaskAgent: ```# Initialize the retriever and TaskAgent # retriever = Retriever(db_session) task_agent = TaskAgent(retriever) # Create a new task # new_task = task_agent.create_task(\"Implement payment gateway integration\", project_id=1) ```",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "taskagent-hard-desc-tech-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "Why is prompt engineering important in the TaskAgent implementation and how does it affect the output?",
+      "context": "Prompt Engineering: Writing the right prompt is really important because it gives the AI context and tells it what we want.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "taskagent-hard-fact-comp-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "How does TaskAgent's approach to creating tasks differ from traditional manual task creation methods in terms of the factors considered?",
+      "context": "In traditional project management, creating tasks often involves: - Brainstorming: Coming up with tasks that cover all aspects of a project. - Estimating: Guessing how long each task will take. - Skill Matching: Figuring out what skills each task needs. This isn't just time-consuming; it also depends a lot on the project manager's experience and memory. [...] The TaskAgent automates this process by: - Leveraging AI: Uses a language model to generate tasks based on project descriptions. - Utilizing Historical Data: Considers similar tasks from past projects to ensure nothing is overlooked. - Incorporating Team Skills: Aligns tasks with the available skills within the team.",
+      "difficulty": "hard",
+      "answer_type": "factoid",
+      "question_type": "comparative"
+    },
+    {
+      "id": "taskagent-hard-proc-tech-01",
+      "section": "TaskAgent: Automating Task Creation",
+      "question": "How would you modify the TaskAgent code to include dependencies between tasks when creating a new task?",
+      "context": "The TaskAgent automates this process by: - Leveraging AI: Uses a language model to generate tasks based on project descriptions. - Utilizing Historical Data: Considers similar tasks from past projects to ensure nothing is overlooked. - Incorporating Team Skills: Aligns tasks with the available skills within the team. [...] # Step 2: Prepare the prompt for the AI model prompt = f\"\"\" You are a task creation assistant. Create a task based on the following description: '{description}'. Consider these similar tasks: {similar_tasks}. Project context: {project_context}. Available team skills: {team_skills}. Provide a title, estimated duration in hours, and required skills. \"\"\"",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "priorityagent-easy-fact-tech-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "What priority levels does the PriorityAgent assign to tasks?",
+      "context": "Provide the priority (High, Medium, or Low) and reasoning.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "priorityagent-easy-desc-conc-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "What is the main purpose of the PriorityAgent in the project management system?",
+      "context": "The PriorityAgent makes prioritizing tasks more objective by: - Analyzing Task Complexity: Considers estimated duration and required skills. - Evaluating Project Context: Looks at dependencies and project milestones. - Leveraging AI Insights: Provides a priority level with clear reasoning.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "priorityagent-med-fact-tech-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "What three types of data does the PriorityAgent retrieve before assigning a priority?",
+      "context": "# Step 1: Retrieve context project_context = self.retriever.get_project_context(task['project_id']) similar_priorities = self.retriever.get_similar_tasks_priorities(task['description'], task['project_id']) team_skills = self.retriever.get_team_skills(task['project_id'])",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "priorityagent-med-proc-tech-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "How would you initialize and use the PriorityAgent to assign a priority to a newly created task?",
+      "context": "Using the new_task from the previous example: ``` # Initialize the PriorityAgent # priority_agent = PriorityAgent(retriever) # Assign priority to the new task # priority_info = priority_agent.assign_priority(new_task) ```",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "priorityagent-hard-desc-comp-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "How does the AI-based priority assignment approach differ from traditional subjective prioritization methods?",
+      "context": "The Challenge of Prioritization: Determining which tasks need immediate attention is often subjective and influenced by external pressures. This can lead to: - Critical Tasks Being Overlooked: Important tasks may not get the attention they need. - Inefficient Use of Resources: Teams may focus on less important tasks. [...] The PriorityAgent makes prioritizing tasks more objective by: - Analyzing Task Complexity: Considers estimated duration and required skills. - Evaluating Project Context: Looks at dependencies and project milestones. - Leveraging AI Insights: Provides a priority level with clear reasoning.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "priorityagent-hard-proc-tech-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "How would you extend the PriorityAgent to include deadline-based prioritization in addition to the existing factors?",
+      "context": "The PriorityAgent makes prioritizing tasks more objective by: - Analyzing Task Complexity: Considers estimated duration and required skills. - Evaluating Project Context: Looks at dependencies and project milestones. - Leveraging AI Insights: Provides a priority level with clear reasoning. [...] # Step 2: Prepare the prompt prompt = f\"\"\" You are a task prioritization assistant. Assign a priority to the following task: '{task['title']}'. Task details: Duration - {task['estimated_duration']} hours, Skills - {', '.join(task['required_skills'])}. Project context: {project_context}. Similar tasks' priorities: {similar_priorities}. Team skills: {team_skills}. Provide the priority (High, Medium, or Low) and reasoning. \"\"\"",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "priorityagent-med-desc-conc-01",
+      "section": "PriorityAgent: Intelligent Task Prioritization",
+      "question": "Why is the reasoning behind priority decisions important according to the article?",
+      "context": "AI Reasoning: By explaining the reasoning, the decision is clear and can be shared with others. [...] Impact: - Objective Decision-Making: Helps avoid bias when prioritizing tasks. - Clear Communication: Gives reasons that you can share with your team.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "suggestionagent-easy-fact-tech-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "What are the two main types of output the SuggestionAgent provides for tasks?",
+      "context": "Expected Output: { \"steps\": [ \"Research payment gateway options (e.g., Stripe, PayPal).\", \"Set up developer accounts with the chosen gateway.\", \"Integrate the gateway API into the Django application.\", \"Implement secure payment processing and data handling.\", \"Test transactions in a sandbox environment.\" ], \"resources\": [ \"Stripe API Documentation\", \"Django Payments Library\", \"PCI Compliance Guidelines\" ] }",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "suggestionagent-easy-desc-conc-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "What is the main purpose of the SuggestionAgent in the project management system?",
+      "context": "The SuggestionAgent aids by: - Analyzing Similar Tasks: Looks at how similar tasks were completed successfully in the past. - Recommending Resources: Suggests tools, libraries, or tutorials that can help. - Providing Step-by-Step Guidance: Offers actionable steps to complete the task efficiently.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "suggestionagent-med-fact-tech-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "What three types of data does the SuggestionAgent retrieve before generating suggestions?",
+      "context": "# Step 1: Retrieve context project_context = self.retriever.get_project_context(project_id) similar_tasks = self.retriever.get_similar_completed_tasks(task['description'], project_id) team_skills = self.retriever.get_team_skills(project_id)",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "suggestionagent-med-proc-tech-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "How would you initialize and use the SuggestionAgent to generate suggestions for a newly created task?",
+      "context": "```# Initialize the SuggestionAgent # suggestion_agent = SuggestionAgent(retriever) # Generate suggestions for the new task suggestions = suggestion_agent.generate_suggestions(new_task, project_id=1) ```",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "suggestionagent-hard-desc-comp-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "How does the SuggestionAgent's approach to providing task guidance differ from traditional project management approaches?",
+      "context": "The Need for Guidance: Even with well-defined tasks, team members may need guidance on the best approach, especially for complex tasks. [...] The SuggestionAgent aids by: - Analyzing Similar Tasks: Looks at how similar tasks were completed successfully in the past. - Recommending Resources: Suggests tools, libraries, or tutorials that can help. - Providing Step-by-Step Guidance: Offers actionable steps to complete the task efficiently.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "suggestionagent-hard-proc-tech-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "How would you modify the SuggestionAgent to include estimated time for each suggested step in the task completion process?",
+      "context": "The SuggestionAgent aids by: - Analyzing Similar Tasks: Looks at how similar tasks were completed successfully in the past. - Recommending Resources: Suggests tools, libraries, or tutorials that can help. - Providing Step-by-Step Guidance: Offers actionable steps to complete the task efficiently. [...] # Step 2: Prepare the prompt prompt = f\"\"\" You are a project management assistant. Provide suggestions for the following task: '{task['title']}'. Task details: Duration - {task['estimated_duration']} hours, Skills - {', '.join(task['required_skills'])}. Project context: {project_context}. Similar completed tasks: {similar_tasks}. Team skills: {team_skills}. Provide actionable steps and recommend resources. \"\"\"",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "suggestionagent-med-desc-conc-01",
+      "section": "SuggestionAgent: Providing Actionable Suggestions",
+      "question": "Why is providing step-by-step guidance important for complex tasks according to the article?",
+      "context": "The Need for Guidance: Even with well-defined tasks, team members may need guidance on the best approach, especially for complex tasks. [...] The SuggestionAgent aids by: - Analyzing Similar Tasks: Looks at how similar tasks were completed successfully in the past. - Recommending Resources: Suggests tools, libraries, or tutorials that can help. - Providing Step-by-Step Guidance: Offers actionable steps to complete the task efficiently.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "collaborationagent-easy-fact-tech-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "What are the two main outputs the CollaborationAgent provides for task team formation?",
+      "context": "Expected Output: { \"team_formation\": [ {\"member_name\": \"Alice Smith\", \"role\": \"Lead Developer\"}, {\"member_name\": \"Bob Johnson\", \"role\": \"Backend Developer\"}, {\"member_name\": \"Carol Martinez\", \"role\": \"QA Specialist\"} ], \"communication_plan\": \"Daily stand-up meetings and a dedicated Slack channel.\" }",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "collaborationagent-easy-desc-conc-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "What is the main purpose of the CollaborationAgent in the project management system?",
+      "context": "The CollaborationAgent helps by: - Analyzing Team Members: Looks at skills, current workload, and past collaborations. - Suggesting Optimal Assignments: Recommends team members best suited for the task. - Proposing Communication Plans: Suggests how the team should coordinate.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "collaborationagent-med-fact-tech-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "What three types of data does the CollaborationAgent retrieve before suggesting team formation?",
+      "context": "# Step 1: Retrieve data available_team_members = self.retriever.get_available_team_members(project_id) project_context = self.retriever.get_project_context(project_id) similar_collaborations = self.retriever.get_similar_collaborations(task['description'], project_id)",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "collaborationagent-med-proc-tech-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "How would you initialize and use the CollaborationAgent to suggest team formation for a newly created task?",
+      "context": "```# Initialize the CollaborationAgent # collaboration_agent = CollaborationAgent(retriever) # Suggest collaboration for the new task # collaboration_info = collaboration_agent.suggest_collaboration(new_task, project_id=1) ```",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "collaborationagent-hard-desc-comp-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "How does the CollaborationAgent's approach to team formation differ from traditional methods of assigning team members to tasks?",
+      "context": "The Challenge of Team Assignment: Assigning the right people to tasks can be complex due to: - Skill Matching: Ensuring team members have the necessary skills. - Availability: Balancing workloads to prevent burnout. - Team Dynamics: Considering how team members work together. [...] The CollaborationAgent helps by: - Analyzing Team Members: Looks at skills, current workload, and past collaborations. - Suggesting Optimal Assignments: Recommends team members best suited for the task. - Proposing Communication Plans: Suggests how the team should coordinate.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "collaborationagent-hard-proc-tech-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "How would you modify the CollaborationAgent to consider team members' preferences and learning goals when making team assignments?",
+      "context": "The CollaborationAgent helps by: - Analyzing Team Members: Looks at skills, current workload, and past collaborations. - Suggesting Optimal Assignments: Recommends team members best suited for the task. - Proposing Communication Plans: Suggests how the team should coordinate. [...] # Step 2: Prepare the prompt prompt = f\"\"\" You are a collaboration assistant. Suggest team members for the following task: '{task['title']}'. Task details: Duration - {task['estimated_duration']} hours, Skills - {', '.join(task['required_skills'])}. Available team members: {available_team_members}. Project context: {project_context}. Similar collaborations: {similar_collaborations}. Provide a team formation and communication plan. \"\"\"",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "collaborationagent-med-desc-conc-01",
+      "section": "CollaborationAgent: Optimizing Team Formation",
+      "question": "Why is considering team dynamics important when assigning people to tasks, according to the article?",
+      "context": "The Challenge of Team Assignment: Assigning the right people to tasks can be complex due to: - Skill Matching: Ensuring team members have the necessary skills. - Availability: Balancing workloads to prevent burnout. - Team Dynamics: Considering how team members work together. [...] Impact: - Optimizes Resource Allocation: Uses resources better by making sure the right people get the right tasks. - Enhances Team Dynamics: Improves teamwork by looking at how people have worked together before.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "reportagent-easy-fact-tech-01",
+      "section": "ReportAgent: Generating Reports",
+      "question": "What is the main purpose of the ReportAgent in the project management system?",
+      "context": "The ReportAgent automates report generation by: - Compiling Project Data: Aggregates information on tasks, team performance, and milestones. - Analyzing Metrics: Evaluates key performance indicators. - Providing Insights: Highlights risks and offers recommendations.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "reportagent-easy-desc-conc-01",
+      "section": "ReportAgent: Generating Reports",
+      "question": "According to the article, why are regular reports crucial in project management?",
+      "context": "The Importance of Reporting: Regular reports are crucial for: - Stakeholder Communication: Keeping everyone informed about progress. - Identifying Risks: Finding potential issues. - Strategic Planning: Making decisions based on data.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "reportagent-med-fact-tech-01",
+      "section": "ReportAgent: Generating Reports",
+      "question": "What four components are included in the report generated by the ReportAgent?",
+      "context": "Expected Output: { \"summary\": \"The project 'E-Commerce Website Development' is progressing well with the addition of the 'Develop Payment Gateway Integration' task.\", \"key_metrics\": { \"total_tasks\": 15, \"completed_tasks\": 10, \"pending_tasks\": 5, \"high_priority_tasks\": 2 }, \"risks\": [ \"Potential delays due to third-party API dependencies.\", \"Team members' workload may increase during integration testing.\" ], \"recommendations\": [ \"Begin integration as early as possible to account for unexpected issues.\", \"Consider allocating additional resources to high-priority tasks.\" ] }",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "reportagent-med-proc-tech-01",
+      "section": "ReportAgent: Generating Reports",
+      "question": "How would you initialize and use the ReportAgent to generate a report for project tasks?",
+      "context": "```# Initialize the ReportAgent # report_agent = ReportAgent(retriever) # Generate a report for the tasks report = report_agent.generate_report([new_task]) ```",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "reportagent-hard-desc-comp-01",
+      "section": "ReportAgent: Generating Reports",
+      "question": "How does the AI-driven approach to report generation differ from traditional manual reporting in project management?",
+      "context": "The ReportAgent automates report generation by: - Compiling Project Data: Aggregates information on tasks, team performance, and milestones. - Analyzing Metrics: Evaluates key performance indicators. - Providing Insights: Highlights risks and offers recommendations. [...] Impact: - Keeps Everyone Updated: Clearly shows how the project is doing. - Proactive Risk Management: Finds problems early so they don't get bigger. - Informs Strategic Decisions: Helps with big decisions by giving suggestions to keep things moving smoothly.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "reportagent-hard-proc-tech-01",
+      "section": "ReportAgent: Generating Reports",
+      "question": "How would you modify the ReportAgent to include trend analysis comparing current project metrics with historical data?",
+      "context": "# Step 1: Retrieve context project_id = tasks[0]['project_id'] project_context = self.retriever.get_project_context(project_id) similar_projects = self.retriever.get_similar_projects(project_id) [...] # Step 2: Prepare the prompt prompt = f\"\"\" You are an AI assistant generating a project report. Project context: {project_context}. Tasks: {tasks}. Similar projects: {similar_projects}. Provide a summary, key metrics, risks, and recommendations. \"\"\"",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-easy-fact-tech-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "What is the main purpose of the Retriever class in the project management system?",
+      "context": "The Retriever class is a crucial component that interacts with the database and the vector store to fetch relevant information needed by the agents.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-easy-desc-conc-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "What are the key functions of the Retriever class as described in the article?",
+      "context": "Key Functions of the Retriever: - get_similar_tasks: Retrieves tasks similar to a given description. - get_project_context: Fetches detailed information about the project. - get_team_skills: Retrieves the skills of team members involved in the project. - get_available_team_members: Lists team members available for assignment. - get_similar_completed_tasks: Finds similar tasks that have been completed. - get_similar_projects: Finds similar projects to those that you are working on.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "retriever-med-fact-tech-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How does the Retriever's get_similar_tasks method work?",
+      "context": "def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-med-proc-tech-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How would you modify the Retriever class to support retrieving team member workload information?",
+      "context": "from typing import List, Dict, Any from sqlalchemy.orm import Session from backend.ai_engine.rag.vector_store import vector_store from backend.database import crud from backend.database import models import json [...] def get_available_team_members(self, project_id: int) -> List[Dict[str, Any]]: team_members = crud.get_project_team_members(self.db, project_id) return [{\"name\": tm.name, \"skills\": tm.skills, \"role\": tm.role} for tm in team_members]",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-hard-desc-comp-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How does the Retriever's approach to finding similar tasks using vector store differ from traditional database queries?",
+      "context": "def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs] [...] Similarity Search: Uses the vector store to find similar documents based on embeddings.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "workflow-easy-fact-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "What is the purpose of LangGraph in the project management system?",
+      "context": "LangGraph enables us to define a stateful workflow where each node represents a step in the process, and edges define the transitions.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-med-desc-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How does the workflow definition in LangGraph connect the different agents in the system?",
+      "context": "# Define nodes workflow.add_node(\"create_task\", lambda state: create_task_node(state, task_agent)) workflow.add_node(\"assign_priority\", lambda state: assign_priority_node(state, priority_agent)) workflow.add_node(\"generate_suggestions\", lambda state: generate_suggestions_node(state, suggestion_agent)) workflow.add_node(\"suggest_collaboration\", lambda state: suggest_collaboration_node(state, collaboration_agent)) workflow.add_node(\"generate_report\", lambda state: generate_report_node(state, report_agent)) # Define edges workflow.add_edge(\"create_task\", \"assign_priority\") workflow.add_edge(\"assign_priority\", \"generate_suggestions\") workflow.add_edge(\"generate_suggestions\", \"suggest_collaboration\") workflow.add_edge(\"suggest_collaboration\", \"generate_report\") workflow.add_edge(\"generate_report\", END)",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-hard-proc-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How would you modify the LangGraph workflow to include conditional branching based on task priority?",
+      "context": "def create_workflow(): try: workflow = StateGraph(Dict) # Initialize agents task_agent = TaskAgent(retriever) priority_agent = PriorityAgent(retriever) suggestion_agent = SuggestionAgent(retriever) collaboration_agent = CollaborationAgent(retriever) report_agent = ReportAgent(retriever) # Define nodes workflow.add_node(\"create_task\", lambda state: create_task_node(state, task_agent)) workflow.add_node(\"assign_priority\", lambda state: assign_priority_node(state, priority_agent)) workflow.add_node(\"generate_suggestions\", lambda state: generate_suggestions_node(state, suggestion_agent)) workflow.add_node(\"suggest_collaboration\", lambda state: suggest_collaboration_node(state, collaboration_agent)) workflow.add_node(\"generate_report\", lambda state: generate_report_node(state, report_agent)) # Define edges workflow.add_edge(\"create_task\", \"assign_priority\") workflow.add_edge(\"assign_priority\", \"generate_suggestions\") workflow.add_edge(\"generate_suggestions\", \"suggest_collaboration\") workflow.add_edge(\"suggest_collaboration\", \"generate_report\") workflow.add_edge(\"generate_report\", END) workflow.set_entry_point(\"create_task\") return workflow.compile() except Exception as e: print(f\"Error creating workflow: {e}\") return None",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-med-desc-tech-02",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How does the Retriever class handle project context retrieval, and what information does it return?",
+      "context": "def get_project_context(self, project_id: int) -> Dict[str, Any]: project = crud.get_project(self.db, project_id) if not project: print(f\"No project found for id: {project_id}\") return {} context = { \"name\": project.name, \"description\": project.description, \"start_date\": str(project.start_date), \"end_date\": str(project.end_date), \"status\": project.status, \"team_members\": [member.name for member in project.team_members] } print(f\"Project context: {context}\") return context",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-hard-desc-tech-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How does the Retriever class interact with the vector store for similarity search, and what are the implications of this design pattern?",
+      "context": "Similarity Search: Uses the vector store to find similar documents based on embeddings. [...] def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-easy-fact-tech-02",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "What parameter controls the number of similar documents returned by the Retriever's similarity search?",
+      "context": "def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-med-desc-conc-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "Why is the Retriever class considered a crucial component in the AI-driven project management system?",
+      "context": "The Retriever class is a crucial component that interacts with the database and the vector store to fetch relevant information needed by the agents. [...] Key Functions of the Retriever [...] Data Formatting: Structures the data in a way that's easy for agents to consume.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "retriever-hard-proc-tech-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How would you enhance the Retriever class to incorporate a caching mechanism for frequently requested similar tasks?",
+      "context": "from typing import List, Dict, Any from sqlalchemy.orm import Session from backend.ai_engine.rag.vector_store import vector_store from backend.database import crud from backend.database import models import json [...] def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-med-fact-tech-02",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "What data structure does the Retriever class use to return team skills information?",
+      "context": "def get_team_skills(self, project_id: int) -> Dict[str, List[str]]: team_members = self.get_project_team_members(project_id) return {tm.name: json.loads(tm.skills) if tm.skills else [] for tm in team_members}",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-easy-proc-tech-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How would you call the Retriever to get similar tasks for a payment gateway implementation?",
+      "context": "def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-hard-fact-comp-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How does the Retriever's approach to finding related information differ from conventional database queries when looking for similar projects?",
+      "context": "def get_similar_projects(self, project_id: int, k: int = 3) -> List[Dict[str, Any]]: project = crud.get_project(self.db, project_id) if not project: return [] query = f\"Project: {project.name} | Description: {project.description}\" similar_docs = vector_store.similarity_search(query, k=k) return [ { \"name\": doc.metadata.get(\"name\", \"Unnamed Project\"), \"description\": doc.page_content } for doc in similar_docs ] [...] Similarity Search: Uses the vector store to find similar documents based on embeddings.",
+      "difficulty": "hard",
+      "answer_type": "factoid",
+      "question_type": "comparative"
+    },
+    {
+      "id": "retriever-med-proc-tech-02",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "How would you implement a new method in the Retriever class to get similar tasks based on required skills?",
+      "context": "from typing import List, Dict, Any from sqlalchemy.orm import Session from backend.ai_engine.rag.vector_store import vector_store from backend.database import crud from backend.database import models import json [...] def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "retriever-hard-desc-conc-01",
+      "section": "The Retriever Class: Data Retrieval",
+      "question": "What are the conceptual benefits of using a vector store for similarity searches in the project management system rather than exact matching?",
+      "context": "Similarity Search: Uses the vector store to find similar documents based on embeddings. [...] def get_similar_tasks(self, description: str, project_id: int, k: int = 3) -> List[Dict[str, Any]]: query = f\"Project ID: {project_id} | Task: {description}\" similar_docs = vector_store.similarity_search(query, k=k) return [{\"title\": doc.metadata[\"title\"], \"description\": doc.page_content} for doc in similar_docs]",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "workflow-easy-desc-conc-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "According to the article, why are dynamic workflows important in project management?",
+      "context": "The Need for Dynamic Workflows: Static workflows can't adapt to the changing nature of projects. A dynamic workflow allows for: - Real-Time Adjustments: You can make changes quickly as the project evolves. - State Management: Keeps track of the current state and transitions.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "workflow-med-fact-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "What is the entry point node in the project management workflow defined using LangGraph?",
+      "context": "workflow.set_entry_point(\"create_task\")",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-med-desc-tech-02",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How does the StateGraph in LangGraph maintain state throughout the workflow execution?",
+      "context": "def create_workflow(): try: workflow = StateGraph(Dict) [...] # Define node functions def create_task_node(state: Dict[str, Any], task_agent: TaskAgent) -> Dict[str, Any]: new_task = task_agent.create_task(state['input_description'], state['project_id']) state['tasks'].append(new_task) return state [...] State Updated: The state now includes task details, priorities, suggestions, collaboration info, and the report.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-hard-proc-tech-02",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How would you implement error handling in the LangGraph workflow to handle failures in any of the agent nodes?",
+      "context": "def create_workflow(): try: workflow = StateGraph(Dict) # Initialize agents task_agent = TaskAgent(retriever) priority_agent = PriorityAgent(retriever) suggestion_agent = SuggestionAgent(retriever) collaboration_agent = CollaborationAgent(retriever) report_agent = ReportAgent(retriever) # Define nodes workflow.add_node(\"create_task\", lambda state: create_task_node(state, task_agent)) workflow.add_node(\"assign_priority\", lambda state: assign_priority_node(state, priority_agent)) workflow.add_node(\"generate_suggestions\", lambda state: generate_suggestions_node(state, suggestion_agent)) workflow.add_node(\"suggest_collaboration\", lambda state: suggest_collaboration_node(state, collaboration_agent)) workflow.add_node(\"generate_report\", lambda state: generate_report_node(state, report_agent)) # Define edges workflow.add_edge(\"create_task\", \"assign_priority\") workflow.add_edge(\"assign_priority\", \"generate_suggestions\") workflow.add_edge(\"generate_suggestions\", \"suggest_collaboration\") workflow.add_edge(\"suggest_collaboration\", \"generate_report\") workflow.add_edge(\"generate_report\", END) workflow.set_entry_point(\"create_task\") return workflow.compile() except Exception as e: print(f\"Error creating workflow: {e}\") return None",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-easy-fact-tech-02",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "What object type is used as the state container in the StateGraph initialization?",
+      "context": "def create_workflow(): try: workflow = StateGraph(Dict)",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-hard-desc-comp-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How does LangGraph's approach to workflow management differ from traditional sequential workflow systems in project management?",
+      "context": "The Need for Dynamic Workflows: Static workflows can't adapt to the changing nature of projects. A dynamic workflow allows for: - Real-Time Adjustments: You can make changes quickly as the project evolves. - State Management: Keeps track of the current state and transitions. LangGraph Solution: LangGraph enables us to define a stateful workflow where each node represents a step in the process, and edges define the transitions. [...] Flexible Workflow: We can tweak the workflow by adding or changing steps.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "workflow-med-fact-tech-02",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "What does the compile() method do in the LangGraph workflow creation process?",
+      "context": "workflow.set_entry_point(\"create_task\") return workflow.compile()",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-med-proc-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How would you define the initial state to execute the workflow for a task related to UI design?",
+      "context": "# Define initial state state = { 'input_description': \"Implement payment gateway integration\", 'project_id': 1, 'tasks': [] } # Execute the workflow # workflow(state)",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "workflow-hard-desc-conc-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How does the stateful nature of LangGraph contribute to the adaptability of the project management system?",
+      "context": "The Need for Dynamic Workflows: Static workflows can't adapt to the changing nature of projects. A dynamic workflow allows for: - Real-Time Adjustments: You can make changes quickly as the project evolves. - State Management: Keeps track of the current state and transitions. LangGraph Solution: LangGraph enables us to define a stateful workflow where each node represents a step in the process, and edges define the transitions. [...] Flexible Workflow: We can tweak the workflow by adding or changing steps.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "node-functions-easy-desc-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "What is the purpose of the create_task_node function in the LangGraph workflow?",
+      "context": "def create_task_node(state: Dict[str, Any], task_agent: TaskAgent) -> Dict[str, Any]: new_task = task_agent.create_task(state['input_description'], state['project_id']) state['tasks'].append(new_task) return state",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "node-functions-med-desc-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How do the node functions in the LangGraph workflow update and pass state between steps?",
+      "context": "def create_task_node(state: Dict[str, Any], task_agent: TaskAgent) -> Dict[str, Any]: new_task = task_agent.create_task(state['input_description'], state['project_id']) state['tasks'].append(new_task) return state def assign_priority_node(state: Dict[str, Any], priority_agent: PriorityAgent) -> Dict[str, Any]: for task in state['tasks']: priority_info = priority_agent.assign_priority(task) task.update(priority_info) return state",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "node-functions-hard-proc-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How would you modify the assign_priority_node function to implement a batch prioritization approach for multiple tasks simultaneously?",
+      "context": "def assign_priority_node(state: Dict[str, Any], priority_agent: PriorityAgent) -> Dict[str, Any]: for task in state['tasks']: priority_info = priority_agent.assign_priority(task) task.update(priority_info) return state",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "node-functions-med-fact-tech-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "What information does the generate_report_node function add to the workflow state?",
+      "context": "def generate_report_node(state: Dict[str, Any], report_agent: ReportAgent) -> Dict[str, Any]: state['report'] = report_agent.generate_report(state['tasks']) return state",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "node-functions-hard-desc-comp-01",
+      "section": "Orchestrating the Workflow with LangGraph",
+      "question": "How does the approach of using agent-specific node functions in LangGraph differ from a more traditional monolithic workflow design?",
+      "context": "def create_task_node(state: Dict[str, Any], task_agent: TaskAgent) -> Dict[str, Any]: new_task = task_agent.create_task(state['input_description'], state['project_id']) state['tasks'].append(new_task) return state def assign_priority_node(state: Dict[str, Any], priority_agent: PriorityAgent) -> Dict[str, Any]: for task in state['tasks']: priority_info = priority_agent.assign_priority(task) task.update(priority_info) return state def generate_suggestions_node(state: Dict[str, Any], suggestion_agent: SuggestionAgent) -> Dict[str, Any]: for task in state['tasks']: task['suggestions'] = suggestion_agent.generate_suggestions(task, state['project_id']) return state def suggest_collaboration_node(state: Dict[str, Any], collaboration_agent: CollaborationAgent) -> Dict[str, Any]: for task in state['tasks']: task['collaboration'] = collaboration_agent.suggest_collaboration(task, state['project_id']) return state def generate_report_node(state: Dict[str, Any], report_agent: ReportAgent) -> Dict[str, Any]: state['report'] = report_agent.generate_report(state['tasks']) return state",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "impact-easy-fact-conc-01",
+      "section": "Real-World Impact",
+      "question": "By what percentage did the AI system reduce time spent on administrative tasks according to the article?",
+      "context": "Efficiency Boost: Automated processes reduced time spent on administrative tasks by over 50%.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "impact-med-desc-conc-01",
+      "section": "Real-World Impact",
+      "question": "According to the article, how did the AI-driven system improve team collaboration?",
+      "context": "Enhanced Collaboration: Teams said they communicated better and understood their roles more clearly.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "impact-hard-desc-comp-01",
+      "section": "Real-World Impact",
+      "question": "How do the real-world impacts of the AI-driven project management system compare to traditional project management challenges described at the beginning of the article?",
+      "context": "Managing projects can sometimes feel overwhelming, like solving a complex puzzle under pressure. Here are the core challenges: - Information Overload: Project management involves a massive amount of emails, documents, and meeting notes, and finding the right information at the right time can be very challenging. - Inefficient Task Creation: Manually creating and prioritizing tasks is very time-consuming and may lead to errors. - Team Coordination Issues: Assigning tasks effectively depends heavily on the team members' skills and availability. [...] Implementing this system made a big difference: - Efficiency Boost: Automated processes reduced time spent on administrative tasks by over 50%. - Enhanced Collaboration: Teams said they communicated better and understood their roles more clearly. - Improved Decision-Making: Using data insights helped us make more strategic choices and cut down on project risks. - Greater Flexibility: The dynamic workflow let us adjust smoothly as project needs changed.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "impact-med-fact-conc-01",
+      "section": "Real-World Impact",
+      "question": "What are the four main impacts of implementing the AI-driven project management system mentioned in the article?",
+      "context": "Implementing this system made a big difference: - Efficiency Boost: Automated processes reduced time spent on administrative tasks by over 50%. - Enhanced Collaboration: Teams said they communicated better and understood their roles more clearly. - Improved Decision-Making: Using data insights helped us make more strategic choices and cut down on project risks. - Greater Flexibility: The dynamic workflow let us adjust smoothly as project needs changed.",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "impact-hard-desc-conc-01",
+      "section": "Real-World Impact",
+      "question": "Why is the flexibility provided by the dynamic workflow particularly valuable in project management contexts?",
+      "context": "Greater Flexibility: The dynamic workflow let us adjust smoothly as project needs changed. [...] Stay Flexible: Be ready to adjust workflows as the project changes.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "conclusion-easy-fact-conc-01",
+      "section": "Conclusion",
+      "question": "What are the four key takeaways listed in the conclusion of the article?",
+      "context": "Key Takeaways: - Use AI for Routine Tasks: Save time for bigger-picture thinking. - Make Decisions with Data: Align choices with project goals. - Encourage Collaboration: Keep team members on the same page and communicating well. - Stay Flexible: Be ready to adjust workflows as the project changes.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "conclusion-med-desc-comp-01",
+      "section": "Conclusion",
+      "question": "How does the article suggest project managers should balance AI automation with human decision-making?",
+      "context": "Using AI agents and a dynamic workflow with LangGraph changed how I manage projects. With routine tasks automated and smart insights available, I could focus more on strategic planning and leading. [...] Use AI for Routine Tasks: Save time for bigger-picture thinking. Make Decisions with Data: Align choices with project goals.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "technical-details-easy-fact-tech-01",
+      "section": "Technical Implementation Details",
+      "question": "What AI model is used in the TaskAgent implementation?",
+      "context": "self.llm = ChatGroq( groq_api_key=os.getenv(\"GROQ_API_KEY\"), model=\"mixtral-8x7b-32768\", temperature=0, max_tokens=None, timeout=None, max_retries=2, )",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "technical-details-med-fact-tech-01",
+      "section": "Technical Implementation Details",
+      "question": "What temperature setting is used for the AI model in the agents, and what does this indicate about the desired output?",
+      "context": "self.llm = ChatGroq( groq_api_key=os.getenv(\"GROQ_API_KEY\"), model=\"mixtral-8x7b-32768\", temperature=0, max_tokens=None, timeout=None, max_retries=2, )",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "technical-details-hard-desc-tech-01",
+      "section": "Technical Implementation Details",
+      "question": "How does the use of PydanticOutputParser contribute to the robustness of the agent implementations?",
+      "context": "Parsing the Response: This PydanticOutputParser ensures the AI's output is neat and easily converted into a Python dictionary. [...] self.parser = PydanticOutputParser(pydantic_object=TaskOutput)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "technical-details-med-proc-tech-01",
+      "section": "Technical Implementation Details",
+      "question": "How would you modify the configuration of the ChatGroq model to make it generate more creative and diverse responses?",
+      "context": "self.llm = ChatGroq( groq_api_key=os.getenv(\"GROQ_API_KEY\"), model=\"mixtral-8x7b-32768\", temperature=0, max_tokens=None, timeout=None, max_retries=2, )",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "technical-details-hard-proc-tech-01",
+      "section": "Technical Implementation Details",
+      "question": "How would you implement a fallback mechanism if the ChatGroq API is unavailable in the agent implementations?",
+      "context": "self.llm = ChatGroq( groq_api_key=os.getenv(\"GROQ_API_KEY\"), model=\"mixtral-8x7b-32768\", temperature=0, max_tokens=None, timeout=None, max_retries=2, )",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "integration-med-desc-conc-01",
+      "section": "Agent Integration",
+      "question": "How does the architecture of the project management system enable the various agents to work together effectively?",
+      "context": "Imagine a system that: - Automatically generates and prioritizes tasks using AI insights and historical data. - Enhances team collaboration by suggesting the best people for each task. - Adapts workflows on the fly, handling changes smoothly. - Gives you practical insights through clear, straightforward reports. [...] LangGraph enables us to define a stateful workflow where each node represents a step in the process, and edges define the transitions.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "integration-hard-desc-comp-01",
+      "section": "Agent Integration",
+      "question": "How does the multi-agent approach in this system compare to a single monolithic AI assistant for project management?",
+      "context": "1. TaskAgent: Automating Task Creation [...] 2. PriorityAgent: Intelligent Task Prioritization [...] 3. SuggestionAgent: Providing Actionable Suggestions [...] 4. CollaborationAgent: Optimizing Team Formation [...] 5. ReportAgent: Generating Reports [...] LangGraph enables us to define a stateful workflow where each node represents a step in the process, and edges define the transitions.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "historical-data-easy-desc-tech-01",
+      "section": "Historical Data Usage",
+      "question": "How does the TaskAgent use historical data when creating tasks?",
+      "context": "Utilizing Historical Data: Considers similar tasks from past projects to ensure nothing is overlooked.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "historical-data-med-desc-conc-01",
+      "section": "Historical Data Usage",
+      "question": "Why is incorporating historical data important in the AI-driven project management system?",
+      "context": "Utilizing Historical Data: Considers similar tasks from past projects to ensure nothing is overlooked. [...] This isn't just time-consuming; it also depends a lot on the project manager's experience and memory.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "agents-integration-easy-fact-tech-01",
+      "section": "Agent Integration",
+      "question": "In the workflow execution example, what information is included in the initial state?",
+      "context": "# Define initial state state = { 'input_description': \"Implement payment gateway integration\", 'project_id': 1, 'tasks': [] }",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "agents-integration-med-proc-tech-01",
+      "section": "Agent Integration",
+      "question": "How would you add a new agent to the workflow that validates task dependencies before finalizing the report?",
+      "context": "def create_workflow(): try: workflow = StateGraph(Dict) # Initialize agents task_agent = TaskAgent(retriever) priority_agent = PriorityAgent(retriever) suggestion_agent = SuggestionAgent(retriever) collaboration_agent = CollaborationAgent(retriever) report_agent = ReportAgent(retriever) # Define nodes workflow.add_node(\"create_task\", lambda state: create_task_node(state, task_agent)) workflow.add_node(\"assign_priority\", lambda state: assign_priority_node(state, priority_agent)) workflow.add_node(\"generate_suggestions\", lambda state: generate_suggestions_node(state, suggestion_agent)) workflow.add_node(\"suggest_collaboration\", lambda state: suggest_collaboration_node(state, collaboration_agent)) workflow.add_node(\"generate_report\", lambda state: generate_report_node(state, report_agent)) # Define edges workflow.add_edge(\"create_task\", \"assign_priority\") workflow.add_edge(\"assign_priority\", \"generate_suggestions\") workflow.add_edge(\"generate_suggestions\", \"suggest_collaboration\") workflow.add_edge(\"suggest_collaboration\", \"generate_report\") workflow.add_edge(\"generate_report\", END) workflow.set_entry_point(\"create_task\") return workflow.compile() except Exception as e: print(f\"Error creating workflow: {e}\") return None",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "agents-integration-hard-desc-tech-01",
+      "section": "Agent Integration",
+      "question": "How does the combination of task agents and the LangGraph framework facilitate complex decision-making in the project management system?",
+      "context": "1. TaskAgent: Automating Task Creation [...] 2. PriorityAgent: Intelligent Task Prioritization [...] 3. SuggestionAgent: Providing Actionable Suggestions [...] 4. CollaborationAgent: Optimizing Team Formation [...] 5. ReportAgent: Generating Reports [...] LangGraph enables us to define a stateful workflow where each node represents a step in the process, and edges define the transitions. [...] Improved Decision-Making: Using data insights helped us make more strategic choices and cut down on project risks.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "practical-application-easy-desc-conc-01",
+      "section": "Practical Application",
+      "question": "According to the article, what types of routine tasks can be offloaded to AI in project management?",
+      "context": "Use AI for Routine Tasks: Save time for bigger-picture thinking. [...] With routine tasks automated and smart insights available, I could focus more on strategic planning and leading.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "practical-application-med-desc-comp-01",
+      "section": "Practical Application",
+      "question": "How does the article compare the project manager's role before and after implementing the AI system?",
+      "context": "Being A Project Manager Sucks, But Why: A day in the life of a project manager revolves around task statuses, time entries, scattered files, and never-ending chats. More often than not, they are seen standing over the shoulders of team members asking them about status updates, why time was not logged, and so on. [...] Using AI agents and a dynamic workflow with LangGraph changed how I manage projects. With routine tasks automated and smart insights available, I could focus more on strategic planning and leading.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "practical-application-hard-proc-conc-01",
+      "section": "Practical Application",
+      "question": "How could a project manager effectively implement the key takeaways from the article in an organization that's resistant to AI adoption?",
+      "context": "Key Takeaways: - Use AI for Routine Tasks: Save time for bigger-picture thinking. - Make Decisions with Data: Align choices with project goals. - Encourage Collaboration: Keep team members on the same page and communicating well. - Stay Flexible: Be ready to adjust workflows as the project changes.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "overall-system-easy-fact-conc-01",
+      "section": "Overall System Design",
+      "question": "What are the main components of the AI-driven project management system described in the article?",
+      "context": "1. TaskAgent: Automating Task Creation [...] 2. PriorityAgent: Intelligent Task Prioritization [...] 3. SuggestionAgent: Providing Actionable Suggestions [...] 4. CollaborationAgent: Optimizing Team Formation [...] 5. ReportAgent: Generating Reports [...] 6. The Retriever Class: Data Retrieval [...] 7. Orchestrating the Workflow with LangGraph",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "overall-system-med-proc-tech-01",
+      "section": "Overall System Design",
+      "question": "How would you implement a user interface to interact with the AI-driven project management system described in the article?",
+      "context": "def create_workflow(): try: workflow = StateGraph(Dict) [...] # Define initial state state = { 'input_description': \"Implement payment gateway integration\", 'project_id': 1, 'tasks': [] } # Execute the workflow # workflow(state)",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "overall-system-hard-proc-tech-01",
+      "section": "Overall System Design",
+      "question": "How would you extend the system to incorporate user feedback for continually improving the AI agents' recommendations?",
+      "context": "1. TaskAgent: Automating Task Creation [...] 2. PriorityAgent: Intelligent Task Prioritization [...] 3. SuggestionAgent: Providing Actionable Suggestions [...] 4. CollaborationAgent: Optimizing Team Formation [...] 5. ReportAgent: Generating Reports [...] Analyzing Similar Tasks: Looks at how similar tasks were completed successfully in the past. [...] Flexible Workflow: We can tweak the workflow by adding or changing steps.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "overall-system-hard-desc-comp-01",
+      "section": "Overall System Design",
+      "question": "How does the system's approach to project management compare to traditional agile or waterfall methodologies?",
+      "context": "Imagine a system that: - Automatically generates and prioritizes tasks using AI insights and historical data. - Enhances team collaboration by suggesting the best people for each task. - Adapts workflows on the fly, handling changes smoothly. - Gives you practical insights through clear, straightforward reports. [...] Static workflows can't adapt to the changing nature of projects. A dynamic workflow allows for: - Real-Time Adjustments: You can make changes quickly as the project evolves. - State Management: Keeps track of the current state and transitions. [...] Greater Flexibility: The dynamic workflow let us adjust smoothly as project needs changed.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    }
+  ]
+}

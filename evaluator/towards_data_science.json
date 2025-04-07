@@ -1,0 +1,913 @@
+{
+  "questions": [
+    {
+      "id": "basics-concept-e1",
+      "section": "Introduction to LangGraph",
+      "question": "What is LangGraph and how does it differ from standard LangChain?",
+      "context": "LangChain is one of the leading frameworks for building applications powered by Large Language Models. With the LangChain Expression Language (LCEL), defining and executing step-by-step action sequences – also known as chains – becomes much simpler. In more technical terms, LangChain allows us to create DAGs (directed acyclic graphs). As LLM applications, particularly LLM agents, have evolved, we've begun to use LLMs not just for execution but also as reasoning engines. This shift has introduced interactions that frequently involve repetition (cycles) and complex conditions. In such scenarios, LCEL is not sufficient, so LangChain implemented a new module – LangGraph. LangGraph (as you might guess from the name) models all interactions as cyclical graphs.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "basics-tech-e1",
+      "section": "LangGraph basics",
+      "question": "What are the two main elements that make up LangGraph cyclical graphs?",
+      "context": "LangGraph is created to define cyclical graphs. Graphs consist of the following elements: Nodes represent actual actions and can be either LLMs, agents or functions. Also, a special END node marks the end of execution. Edges connect nodes and determine the execution flow of your graph. There are basic edges that simply link one node to another and conditional edges that incorporate if-statements and additional logic.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "basics-compare-m1",
+      "section": "Introduction to LangGraph",
+      "question": "How does LangGraph compare to CrewAI in terms of framework level and customization?",
+      "context": "In the previous article, we tried using CrewAI, another popular framework for multi-agent systems. LangGraph, however, takes a different approach. While CrewAI is a high-level framework with many predefined features and ready-to-use components, LangGraph operates at a lower level, offering extensive customization and control.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "basics-concept-m1",
+      "section": "LangGraph basics",
+      "question": "What role does the state play in a LangGraph graph?",
+      "context": "Another important concept is the state of the graph. The state serves as a foundational element for collaboration among the graph's components. It represents a snapshot of the graph that any part – whether nodes or edges – can access and modify during execution to retrieve or update information. Additionally, the state plays a crucial role in persistence. It is automatically saved after each step, allowing you to pause and resume execution at any point. This feature supports the development of more complex applications, such as those requiring error correction or incorporating human-in-the-loop interactions.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "single-tech-e1",
+      "section": "Single-agent workflow",
+      "question": "How do you define a tool for a LangGraph agent using pydantic?",
+      "context": "Let's define one tool named execute_sql, which enables the execution of any SQL query. We use pydantic to specify the tool's structure, ensuring that the LLM agent has all the needed information to use the tool effectively.\n```\nfrom langchain_core.tools import tool\nfrom pydantic.v1 import BaseModel, Field\nfrom typing import Optional\n\nclass SQLQuery(BaseModel):\n    query: str = Field(description=\"SQL query to execute\")\n\n@tool(args_schema = SQLQuery)\ndef execute_sql(query: str) -> str:\n    \"\"\"Returns the result of SQL query execution\"\"\"\n    return get_clickhouse_data(query)\n```",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "single-tech-m1",
+      "section": "Single-agent workflow",
+      "question": "What is the purpose of adding operator.add annotation to the messages field in AgentState?",
+      "context": "We've defined a single parameter in AgentState – messages – which is a list of objects of the class AnyMessage. Additionally, we annotated it with operator.add (reducer). This annotation ensures that each time a node returns a message, it is appended to the existing list in the state. Without this operator, each new message would replace the previous value rather than being added to the list.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "single-tech-h1",
+      "section": "Single-agent workflow",
+      "question": "Explain the complete flow of execution in the SQLAgent class, from initialization to the conditional routing logic.",
+      "context": "class SQLAgent:\n    # initialising the object\n    def init(self, model, tools, system_prompt = \"\"):\n        self.system_prompt = system_prompt\n\n        # initialising graph with a state \n        graph = StateGraph(AgentState)\n\n        # adding nodes \n        graph.add_node(\"llm\", self.call_llm)\n        graph.add_node(\"function\", self.execute_function)\n        graph.add_conditional_edges(\n            \"llm\",\n            self.exists_function_calling,\n            {True: \"function\", False: END}\n        )\n        graph.add_edge(\"function\", \"llm\")\n\n        # setting starting point\n        graph.set_entry_point(\"llm\")\n\n        self.graph = graph.compile()\n        self.tools = {t.name: t for t in tools}\n        self.model = model.bind_tools(tools)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "single-tech-m2",
+      "section": "Single-agent workflow",
+      "question": "How does the call_llm function in SQLAgent process the agent state?",
+      "context": "def call_llm(self, state: AgentState):\n    messages = state['messages']\n    # adding system prompt if it's defined\n    if self.system_prompt:\n        messages = [SystemMessage(content=self.system_prompt)] + messages\n\n    # calling LLM\n    message = self.model.invoke(messages)\n\n    return {'messages': [message]}",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "single-tech-e2",
+      "section": "Single-agent workflow",
+      "question": "What special node in LangGraph marks the end of execution?",
+      "context": "Nodes represent actual actions and can be either LLMs, agents or functions. Also, a special END node marks the end of execution.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "single-tech-h2",
+      "section": "Single-agent workflow",
+      "question": "What happens in the execute_function method when an invalid tool name is encountered?",
+      "context": "def execute_function(self, state: AgentState):\n    tool_calls = state['messages'][-1].tool_calls\n\n    results = []\n    for tool in tool_calls:\n      # checking whether tool name is correct\n      if not t['name'] in self.tools:\n      # returning error to the agent \n      result = \"Error: There's no such tool, please, try again\" \n      else:\n      # getting result from the tool\n      result = self.tools[t['name']].invoke(t['args'])\n\n      results.append(\n        ToolMessage(\n          tool_call_id=t['id'], \n          name=t['name'], \n          content=str(result)\n        )\n    )\n    return {'messages': results}",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "prebuilt-tech-e1",
+      "section": "Using prebuilt agents",
+      "question": "How do you create a prebuilt ReAct agent in LangGraph?",
+      "context": "We've learned how to build an agent from scratch. However, we can leverage LangGraph's built-in functionality for simpler tasks like this one.\n\nWe can use a prebuilt ReAct agent to get a similar result: an agent that can work with tools.\n\nfrom langgraph.prebuilt import create_react_agent\nprebuilt_doc_agent = create_react_agent(model, [execute_sql], state_modifier = system_prompt)",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "prebuilt-compare-m1",
+      "section": "Using prebuilt agents",
+      "question": "What are the trade-offs between building a custom agent and using a prebuilt agent in LangGraph?",
+      "context": "We've learned how to build an agent from scratch. However, we can leverage LangGraph's built-in functionality for simpler tasks like this one.\n\nWe can use a prebuilt ReAct agent to get a similar result: an agent that can work with tools.\n\nfrom langgraph.prebuilt import create_react_agent\nprebuilt_doc_agent = create_react_agent(model, [execute_sql], state_modifier = system_prompt)",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "persist-concept-e1",
+      "section": "Persistence and streaming",
+      "question": "What is persistence in LangGraph and why is it important?",
+      "context": "Persistence refers to the ability to maintain context across different interactions. It's essential for agentic use cases when an application can get additional input from the user.\n\nLangGraph automatically saves the state after each step, allowing you to pause or resume execution. This capability supports the implementation of advanced business logic, such as error recovery or human-in-the-loop interactions.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "persist-tech-m1",
+      "section": "Persistence and streaming",
+      "question": "How do you implement persistence in a custom LangGraph agent?",
+      "context": "If you're working with a custom agent, you need to pass memory as a check pointer while compiling a graph.\n\nclass SQLAgent:\n    def __init__(self, model, tools, system_prompt = \"\"):\n        <...>\n        self.graph = graph.compile(checkpointer=memory)\n        <...>",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "persist-tech-e2",
+      "section": "Persistence and streaming",
+      "question": "What database does LangGraph use for simple persistence implementation?",
+      "context": "The easiest way to add persistence is to use an in-memory SQLite database.\n\nfrom langgraph.checkpoint.sqlite import SqliteSaver\nmemory = SqliteSaver.from_conn_string(\":memory:\")",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "stream-tech-m1",
+      "section": "Persistence and streaming",
+      "question": "What are the two types of streaming supported by LangGraph and what are their use cases?",
+      "context": "With streaming, we can receive results from each step of execution as a separate event in a stream. This feature is crucial for production applications when multiple conversations (or threads) need to be processed simultaneously.\n\nLangGraph supports not only event streaming but also token-level streaming. The only use case I have in mind for token streaming is to display the answers in real-time word by word (similar to ChatGPT implementation).",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "stream-tech-h1",
+      "section": "Persistence and streaming",
+      "question": "How do threads in LangGraph help maintain context isolation between conversations, and what happens when using different thread IDs?",
+      "context": "Let's try to change the thread and ask the same follow-up question.\n\nnew_thread = {\"configurable\": {\"thread_id\": \"42\"}}\nfollowup_messages = [HumanMessage(content=\"I would like to know the column names and types. Maybe you could look it up in database using describe.\")]\n\nfor event in prebuilt_doc_agent.stream({\"messages\": followup_messages}, new_thread):\n    for v in event.values():\n        v['messages'][-1].pretty_print()\n\nIt was not surprising that the agent lacked the context needed to answer our question. Threads are designed to isolate different conversations, ensuring that each thread maintains its own context.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "stream-tech-h2",
+      "section": "Persistence and streaming",
+      "question": "What methods are suggested for managing memory in lengthy conversations with LangGraph?",
+      "context": "In real-life applications, managing memory is essential. Conversations might become pretty lengthy, and at some point, it won't be practical to pass the whole history to LLM every time. Therefore, it's worth trimming or filtering messages. We won't go deep into the specifics here, but you can find guidance on it in the LangGraph documentation. Another option to compress the conversational history is using summarization (example).",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-concept-e1",
+      "section": "Multi-Agent Systems",
+      "question": "What is the main purpose of the multi-agent application example in the article?",
+      "context": "As an example of a multi-agent workflow, I would like to build an application that can handle questions from various domains. We will have a set of expert agents, each specializing in different types of questions, and a router agent that will find the best-suited expert to address each query. Such an application has numerous potential use cases: from automating customer support to answering questions from colleagues in internal chats.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "multi-tech-m1",
+      "section": "Multi-Agent Systems",
+      "question": "How is the state defined in the multi-agent example, and what fields does it contain?",
+      "context": "First, we need to create the agent state – the information that will help agents to solve the question together. I will use the following fields:\n\n- question – initial customer request;\n- question_type – the category that defines which agent will be working on the request;\n- answer – the proposed answer to the question;\n- feedback – a field for future use that will gather some feedback.\n\nclass MultiAgentState(TypedDict):\n    question: str\n    question_type: str\n    answer: str\n    feedback: str",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-tech-e2",
+      "section": "Multi-Agent Systems",
+      "question": "What are the three question types the router can classify in the multi-agent example?",
+      "context": "Then, let's create a router node. It will be a simple LLM model that defines the category of question (database, LangChain or general questions).\n\nquestion_category_prompt = '''You are a senior specialist of analytical support. Your task is to classify the incoming questions. Depending on your answer, question will be routed to the right team, so your task is crucial for our team. There are 3 possible question types: - DATABASE - questions related to our database (tables or fields) - LANGCHAIN- questions related to LangGraph or LangChain libraries - GENERAL - general questions Return in the output only one word (DATABASE, LANGCHAIN or GENERAL). '''",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-tech-m2",
+      "section": "Multi-Agent Systems",
+      "question": "How does the router_node function work in the multi-agent system?",
+      "context": "def router_node(state: MultiAgentState):\n    messages = [\n        SystemMessage(content=question_category_prompt),\n        HumanMessage(content=state['question'])\n    ]\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    response = model.invoke(messages)\n    return {\"question_type\": response.content}",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-tech-h1",
+      "section": "Multi-Agent Systems",
+      "question": "Explain how the conditional routing is implemented in the multi-agent system graph.",
+      "context": "The last missing bit is a conditional function for routing. This will be quite straightforward—we just need to propagate the question type from the state defined by the router node.\n\ndef route_question(state: MultiAgentState):\n    return state['question_type']\n\nNow, it's time to create our graph.\n\nbuilder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\nbuilder.add_edge('database_expert', END)\nbuilder.add_edge('langchain_expert', END)\nbuilder.add_edge('general_assistant', END)\ngraph = builder.compile(checkpointer=memory)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-tech-m3",
+      "section": "Multi-Agent Systems",
+      "question": "How do the specialized expert agents differ in terms of their tools and capabilities?",
+      "context": "Next, let's create nodes for our expert agents. We will use the ReAct agent with the SQL tool we previously built as the database agent.\n\n```\n## database expert\n\nsql_expert_system_prompt = ''' You are an expert in SQL, so you can help the team to gather needed data to power their decisions. You are very accurate and take into account all the nuances in data. You use SQL to get the data before answering the question. '''\n\ndef sql_expert_node(state: MultiAgentState):\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    sql_agent = create_react_agent(model, [execute_sql], state_modifier = sql_expert_system_prompt)\n    messages = [HumanMessage(content=state['question'])]\n    result = sql_agent.invoke({\"messages\": messages})\n    return {'answer': result['messages'][-1].content}\n```\n\nFor LangChain-related questions, we will use the ReAct agent. To enable the agent to answer questions about the library, we will equip it with a search engine tool. I chose Tavily for this purpose as it provides the search results optimised for LLM applications.\n\n[...]\n\nFor general questions, we will leverage a simple LLM model without specific tools.\n\n```\n## general model\n\ngeneral_prompt = '''You're a friendly assistant and your goal is to answer general questions. Please, don't provide any unchecked information and just tell that you don't know if you don't have enough info. '''\n\ndef general_assistant_node(state: MultiAgentState):\n    messages = [\n        SystemMessage(content=general_prompt),\n        HumanMessage(content=state['question'])\n    ]\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    response = model.invoke(messages)\n    return {\"answer\": response.content}\n```",
+      "difficulty": "medium",
+      "answer_type": "comparative",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-tech-h2",
+      "section": "Multi-Agent Systems",
+      "question": "How is the Tavily search tool integrated into the LangChain expert agent and what benefits does it provide?",
+      "context": "For LangChain-related questions, we will use the ReAct agent. To enable the agent to answer questions about the library, we will equip it with a search engine tool. I chose Tavily for this purpose as it provides the search results optimised for LLM applications.\n\nIf you don't have an account, you can register to use Tavily for free (up to 1K requests per month). To get started, you will need to specify the Tavily API key in an environment variable.\n\n```\n## search expert\n\nfrom langchain_community.tools.tavily_search import TavilySearchResults\nos.environ[\"TAVILY_API_KEY\"] = 'tvly-...'\ntavily_tool = TavilySearchResults(max_results=5)\n\nsearch_expert_system_prompt = ''' You are an expert in LangChain and other technologies. Your goal is to answer questions based on results provided by search. You don't add anything yourself and provide only information baked by other sources. '''\n\ndef search_expert_node(state: MultiAgentState):\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    sql_agent = create_react_agent(model, [tavily_tool], state_modifier = search_expert_system_prompt)\n    messages = [HumanMessage(content=state['question'])]\n    result = sql_agent.invoke({\"messages\": messages})\n    return {'answer': result['messages'][-1].content}\n```",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-concept-e1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "What is the purpose of adding human-in-the-loop interactions to the multi-agent system?",
+      "context": "We've done an excellent job creating a tool to answer questions. However, in many cases, it's beneficial to keep a human in the loop to approve proposed actions or provide additional feedback. Let's add a step where we can collect feedback from a human before returning the final result to the user.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "human-tech-m1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "What are the two nodes added to implement human-in-the-loop functionality?",
+      "context": "The simplest approach is to add two additional nodes:\n\n- A human node to gather feedback,\n- An editor node to revisit the answer, taking into account the feedback.",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-tech-e2",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How is the human feedback node implemented in the example?",
+      "context": "def human_feedback_node(state: MultiAgentState):\n    pass",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-tech-m2",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "What information does the editor node use to generate the final answer?",
+      "context": "editor_prompt = '''You're an editor and your goal is to provide the final answer to the customer, taking into account the feedback. You don't add any information on your own. You use friendly and professional tone. In the output please provide the final answer to the customer without additional comments. Here's all the information you need.\n\n## Question from customer:\n\n## {question}\n\n## Draft answer:\n\n## {answer}\n\n## Feedback:\n\n## {feedback}\n\n'''\n\ndef editor_node(state: MultiAgentState):\n    messages = [\n        SystemMessage(content=editor_prompt.format(question = state['question'], answer = state['answer'], feedback = state['feedback']))\n    ]\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    response = model.invoke(messages)\n    return {\"answer\": response.content}",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-tech-h1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How does the interrupt_before parameter work in the graph compilation, and what effect does it have on execution?",
+      "context": "Let's add these nodes to our graph. Additionally, we need to introduce an interruption before the human node to ensure that the process pauses for human feedback.\n\n```\nbuilder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_node('human', human_feedback_node)\nbuilder.add_node('editor', editor_node)\n\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\n\nbuilder.add_edge('database_expert', 'human')\nbuilder.add_edge('langchain_expert', 'human')\nbuilder.add_edge('general_assistant', 'human')\nbuilder.add_edge('human', 'editor')\nbuilder.add_edge('editor', END)\ngraph = builder.compile(checkpointer=memory, interrupt_before = ['human'])\n```\n\nNow, when we run the graph, the execution will be stopped before the human node.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-tech-h2",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How can you update the state and resume execution after an interruption in LangGraph?",
+      "context": "Let's get the customer input and update the state with the feedback.\n\nuser_input = input(\"Do I need to change anything in the answer?\")\n\ngraph.update_state(thread, {\"feedback\": user_input}, as_node=\"human\")\n\nWe can check the state to confirm that the feedback has been populated and that the next node in the sequence is editor.\n\nprint(graph.get_state(thread).values['feedback'])\nprint(graph.get_state(thread).next)\n\nWe can just continue the execution. Passing None as input will resume the process from the point where it was paused.\n\nfor event in graph.stream(None, thread, stream_mode=\"values\"):\n    print(event)",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-tech-m3",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How is the HumanInputRun tool used for a more agentic human-in-the-loop interaction?",
+      "context": "We can implement human-in-the-loop interactions in a more agentic way by equipping our editor with the Human tool.\n\nLet's adjust our editor. I've slightly changed the prompt and added the tool to the agent.\n\n```\nfrom langchain_community.tools import HumanInputRun\nhuman_tool = HumanInputRun()\n\neditor_agent_prompt = '''You're an editor and your goal is to provide the final answer to the customer, taking into the initial question. If you need any clarifications or need feedback, please, use human. Always reach out to human to get the feedback before final answer. You don't add any information on your own. You use friendly and professional tone. In the output please provide the final answer to the customer without additional comments. Here's all the information you need.\n\n## Question from customer:\n\n## {question}\n\n## Draft answer:\n\n## {answer}\n\n'''\n\nmodel = ChatOpenAI(model=\"gpt-4o-mini\")\neditor_agent = create_react_agent(model, [human_tool])\nmessages = [SystemMessage(content=editor_agent_prompt.format(question = state['question'], answer = state['answer']))]\neditor_result = editor_agent.invoke({\"messages\": messages})",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "advanced-tech-h1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "Compare and contrast the two approaches to human-in-the-loop interactions presented in the article.",
+      "context": "Let's update our main graph to incorporate the new agent instead of using the two separate nodes. With this approach, we don't need interruptions any more.\n\ndef editor_agent_node(state: MultiAgentState):\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    editor_agent = create_react_agent(model, [human_tool])\n    messages = [SystemMessage(content=editor_agent_prompt.format(question = state['question'], answer = state['answer']))]\n    result = editor_agent.invoke({\"messages\": messages})\n    return {'answer': result['messages'][-1].content}\n\nbuilder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_node('editor', editor_agent_node)\n\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\n\nbuilder.add_edge('database_expert', 'editor')\nbuilder.add_edge('langchain_expert', 'editor')\nbuilder.add_edge('general_assistant', 'editor')\nbuilder.add_edge('editor', END)\n\ngraph = builder.compile(checkpointer=memory)\n\nThis graph will work similarly to the previous one. I personally prefer this approach since it leverages tools, making the solution more agile. For example, agents can reach out to humans multiple times and refine questions as needed.",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "technical"
+    },
+    {
+      "id": "summary-concept-e1",
+      "section": "Summary",
+      "question": "What are the main strengths of LangGraph mentioned in the summary?",
+      "context": "Overall, I find LangGraph quite a powerful framework for building complex LLM applications:\n\n- LangGraph is a low-level framework that offers extensive customisation options, allowing you to build precisely what you need.\n\n- Since LangGraph is built on top of LangChain, it's seamlessly integrated into its ecosystem, making it easy to leverage existing tools and components.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "summary-concept-m1",
+      "section": "Summary",
+      "question": "What are the main weaknesses of LangGraph mentioned in the summary?",
+      "context": "However, there are areas where LangGrpah could be improved:\n\n- The agility of LangGraph comes with a higher entry barrier. While you can understand the concepts of CrewAI within 15–30 minutes, it takes some time to get comfortable and up to speed with LangGraph.\n\n- LangGraph provides you with a higher level of control, but it misses some cool prebuilt features of CrewAI, such as collaboration or ready-to-use RAG tools.\n\n- LangGraph doesn't enforce best practices like CrewAI does (for example, role-playing or guardrails). So it can lead to poorer results.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "summary-compare-h1",
+      "section": "Summary",
+      "question": "When would you choose CrewAI over LangGraph according to the article, and why?",
+      "context": "I would say that CrewAI is a better framework for newbies and common use cases because it helps you get good results quickly and provides guidance to prevent mistakes.\n\nIf you want to build an advanced application and need more control, LangGraph is the way to go. Keep in mind that you'll need to invest time in learning LangGraph and should be fully responsible for the final solution, as the framework won't provide guidance to help you avoid common mistakes.",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "comparative"
+    },
+    {
+      "id": "basics-concept-h1",
+      "section": "LangGraph basics",
+      "question": "How does the cyclical nature of LangGraph address the limitations of traditional DAGs in LangChain?",
+      "context": "As LLM applications, particularly LLM agents, have evolved, we've begun to use LLMs not just for execution but also as reasoning engines. This shift has introduced interactions that frequently involve repetition (cycles) and complex conditions. In such scenarios, LCEL is not sufficient, so LangChain implemented a new module – LangGraph. LangGraph (as you might guess from the name) models all interactions as cyclical graphs. These graphs enable the development of advanced workflows and interactions with multiple loops and if-statements, making it a handy tool for creating both agent and multi-agent workflows.",
+      "difficulty": "hard",
+      "answer_type": "conceptual",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "basics-tech-h1",
+      "section": "LangGraph basics",
+      "question": "How do nodes, edges, and state work together to enable complex cyclical workflows in LangGraph?",
+      "context": "LangGraph is created to define cyclical graphs. Graphs consist of the following elements: Nodes represent actual actions and can be either LLMs, agents or functions. Also, a special END node marks the end of execution. Edges connect nodes and determine the execution flow of your graph. There are basic edges that simply link one node to another and conditional edges that incorporate if-statements and additional logic. Another important concept is the state of the graph. The state serves as a foundational element for collaboration among the graph's components. It represents a snapshot of the graph that any part – whether nodes or edges – can access and modify during execution to retrieve or update information. Additionally, the state plays a crucial role in persistence. It is automatically saved after each step, allowing you to pause and resume execution at any point. This feature supports the development of more complex applications, such as those requiring error correction or incorporating human-in-the-loop interactions.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "single-tech-e3",
+      "section": "Single-agent workflow",
+      "question": "What function is used in the SQLAgent to decide whether to call a tool or end execution?",
+      "context": "def exists_function_calling(self, state: AgentState):\n    result = state['messages'][-1]\n    return len(result.tool_calls) > 0",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "visual-tech-e1",
+      "section": "Single-agent workflow",
+      "question": "What library is used to visualize LangGraph graphs?",
+      "context": "LangGraph provides us with quite a handy feature to visualise graphs. To use it, you need to install pygraphviz.\n\nIt's a bit tricky for Mac with M1/M2 chips, so here is the lifehack for you (source):\n\n! brew install graphviz\n! python3 -m pip install -U --no-cache-dir --config-settings=\"--global-option=build_ext\" --config-settings=\"--global-option=-I$(brew --prefix graphviz)/include/\" --config-settings=\"--global-option=-L$(brew --prefix graphviz)/lib/\" pygraphviz\n\nAfter figuring out the installation, here's our graph.\n\nfrom IPython.display import Image\nImage(doc_agent.graph.get_graph().draw_png())",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "stream-proc-m1",
+      "section": "Persistence and streaming",
+      "question": "How do you define and use threads in LangGraph for context isolation?",
+      "context": "thread = {\"configurable\": {\"thread_id\": \"1\"}}\nmessages = [HumanMessage(content=\"What info do we have in ecommerce_db.users table?\")]\n\nfor event in prebuilt_doc_agent.stream({\"messages\": messages}, thread):\n    for v in event.values():\n        v['messages'][-1].pretty_print()\n\n[...]\n\nThis time, we got the full answer from the agent. Since we provided the same thread, the agent was able to get the context from the previous discussion. That's how persistence works.\n\nLet's try to change the thread and ask the same follow-up question.\n\nnew_thread = {\"configurable\": {\"thread_id\": \"42\"}}\nfollowup_messages = [HumanMessage(content=\"I would like to know the column names and types. Maybe you could look it up in database using describe.\")]\n\nfor event in prebuilt_doc_agent.stream({\"messages\": followup_messages}, new_thread):\n    for v in event.values():\n        v['messages'][-1].pretty_print()",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-proc-m1",
+      "section": "Multi-Agent Systems",
+      "question": "How do you build a multi-agent system with a router and specialized experts in LangGraph?",
+      "context": "builder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\nbuilder.add_edge('database_expert', END)\nbuilder.add_edge('langchain_expert', END)\nbuilder.add_edge('general_assistant', END)\ngraph = builder.compile(checkpointer=memory)",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-proc-e1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How do you resume graph execution after a human-in-the-loop interruption?",
+      "context": "We can just continue the execution. Passing None as input will resume the process from the point where it was paused.\n\nfor event in graph.stream(None, thread, stream_mode=\"values\"):\n    print(event)",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "summary-compare-m1",
+      "section": "Summary",
+      "question": "How does the learning curve compare between LangGraph and CrewAI according to the article?",
+      "context": "The agility of LangGraph comes with a higher entry barrier. While you can understand the concepts of CrewAI within 15–30 minutes, it takes some time to get comfortable and up to speed with LangGraph.",
+      "difficulty": "medium",
+      "answer_type": "comparative",
+      "question_type": "comparative"
+    },
+    {
+      "id": "basics-concept-m2",
+      "section": "Introduction to LangGraph",
+      "question": "What types of applications is LangGraph particularly useful for?",
+      "context": "LangGraph (as you might guess from the name) models all interactions as cyclical graphs. These graphs enable the development of advanced workflows and interactions with multiple loops and if-statements, making it a handy tool for creating both agent and multi-agent workflows.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "summary-compare-h2",
+      "section": "Summary",
+      "question": "How do LangGraph and CrewAI differ in their approach to enforcing best practices?",
+      "context": "LangGraph doesn't enforce best practices like CrewAI does (for example, role-playing or guardrails). So it can lead to poorer results.",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "comparative"
+    },
+    {
+      "id": "persist-proc-e1",
+      "section": "Persistence and streaming",
+      "question": "How do you add persistence to a prebuilt agent in LangGraph?",
+      "context": "For the off-the-shelf agent, we can pass memory as an argument while creating an agent.\n\nprebuilt_doc_agent = create_react_agent(model, [execute_sql], checkpointer=memory)",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-proc-h1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "Design a complete workflow for implementing a human-in-the-loop interaction with error handling in LangGraph.",
+      "context": "Let's update our main graph to incorporate the new agent instead of using the two separate nodes. With this approach, we don't need interruptions any more.\n\ndef editor_agent_node(state: MultiAgentState):\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    editor_agent = create_react_agent(model, [human_tool])\n    messages = [SystemMessage(content=editor_agent_prompt.format(question = state['question'], answer = state['answer']))]\n    result = editor_agent.invoke({\"messages\": messages})\n    return {'answer': result['messages'][-1].content}\n\nbuilder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_node('editor', editor_agent_node)\n\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\n\nbuilder.add_edge('database_expert', 'editor')\nbuilder.add_edge('langchain_expert', 'editor')\nbuilder.add_edge('general_assistant', 'editor')\nbuilder.add_edge('editor', END)\n\ngraph = builder.compile(checkpointer=memory)\n\nThis graph will work similarly to the previous one. I personally prefer this approach since it leverages tools, making the solution more agile. For example, agents can reach out to humans multiple times and refine questions as needed.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "basic-arch-e1",
+      "section": "LangGraph basics",
+      "question": "What is the special node that marks the end of execution in LangGraph?",
+      "context": "Nodes represent actual actions and can be either LLMs, agents or functions. Also, a special END node marks the end of execution.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "basic-arch-m1",
+      "section": "LangGraph basics",
+      "question": "How do conditional edges differ from basic edges in LangGraph?",
+      "context": "Edges connect nodes and determine the execution flow of your graph. There are basic edges that simply link one node to another and conditional edges that incorporate if-statements and additional logic.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "basic-usage-h1",
+      "section": "LangGraph basics",
+      "question": "Why is the graph state considered a foundational element for node collaboration in LangGraph?",
+      "context": "Another important concept is the state of the graph. The state serves as a foundational element for collaboration among the graph's components. It represents a snapshot of the graph that any part – whether nodes or edges – can access and modify during execution to retrieve or update information. Additionally, the state plays a crucial role in persistence. It is automatically saved after each step, allowing you to pause and resume execution at any point. This feature supports the development of more complex applications, such as those requiring error correction or incorporating human-in-the-loop interactions.",
+      "difficulty": "hard",
+      "answer_type": "conceptual",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "sql-tool-e1",
+      "section": "Single-agent workflow",
+      "question": "What Python decorator is used to define tools in the LangGraph example?",
+      "context": "@tool(args_schema = SQLQuery)\ndef execute_sql(query: str) -> str:\n    \"\"\"Returns the result of SQL query execution\"\"\"\n    return get_clickhouse_data(query)",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "db-error-m1",
+      "section": "Single-agent workflow",
+      "question": "How does the example handle database errors when executing SQL queries?",
+      "context": "def get_clickhouse_data(query, host = CH_HOST, connection_timeout = 1500):\n    r = requests.post(host, params = {'query': query}, timeout = connection_timeout)\n    if r.status_code == 200:\n        return r.text\n    else:\n        return 'Database returned the following error:\\n' + r.text\n\nIt's crucial to make LLM tools reliable and error-prone. If a database returns an error, I provide this feedback to the LLM rather than throwing an exception and halting execution. Then, the LLM agent will have an opportunity to fix an error and call the function again.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "agent-state-e1",
+      "section": "Single-agent workflow",
+      "question": "What TypedDict class is used to define the agent state in the SQLAgent example?",
+      "context": "class AgentState(TypedDict):\n    messages: Annotated[list[AnyMessage], operator.add]",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "agent-init-m1",
+      "section": "Single-agent workflow",
+      "question": "What arguments are required when initializing the SQLAgent class?",
+      "context": "class SQLAgent:\n    # initialising the object\n    def init(self, model, tools, system_prompt = \"\"):\n        self.system_prompt = system_prompt\n\n        # initialising graph with a state \n        graph = StateGraph(AgentState)",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "graph-compile-h1",
+      "section": "Single-agent workflow",
+      "question": "What happens during the graph compilation process in LangGraph and why is it necessary?",
+      "context": "# setting starting point\ngraph.set_entry_point(\"llm\")\n\nself.graph = graph.compile()\nself.tools = {t.name: t for t in tools}\nself.model = model.bind_tools(tools)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "tool-binding-m1",
+      "section": "Single-agent workflow",
+      "question": "How are tools bound to the model in the SQLAgent initialization?",
+      "context": "self.graph = graph.compile()\nself.tools = {t.name: t for t in tools}\nself.model = model.bind_tools(tools)",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "tools-dict-h1",
+      "section": "Single-agent workflow",
+      "question": "Why does the SQLAgent create a dictionary of tools with tool names as keys?",
+      "context": "self.tools = {t.name: t for t in tools}\n\n[...]\n\ndef execute_function(self, state: AgentState):\n    tool_calls = state['messages'][-1].tool_calls\n\n    results = []\n    for tool in tool_calls:\n      # checking whether tool name is correct\n      if not t['name'] in self.tools:\n      # returning error to the agent \n      result = \"Error: There's no such tool, please, try again\" \n      else:\n      # getting result from the tool\n      result = self.tools[t['name']].invoke(t['args'])",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "tool-execution-m1",
+      "section": "Single-agent workflow",
+      "question": "How does the execute_function method handle tool calls in the SQLAgent?",
+      "context": "def execute_function(self, state: AgentState):\n    tool_calls = state['messages'][-1].tool_calls\n\n    results = []\n    for tool in tool_calls:\n      # checking whether tool name is correct\n      if not t['name'] in self.tools:\n      # returning error to the agent \n      result = \"Error: There's no such tool, please, try again\" \n      else:\n      # getting result from the tool\n      result = self.tools[t['name']].invoke(t['args'])\n\n      results.append(\n        ToolMessage(\n          tool_call_id=t['id'], \n          name=t['name'], \n          content=str(result)\n        )\n    )\n    return {'messages': results}",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "cond-edge-h1",
+      "section": "Single-agent workflow",
+      "question": "Explain how conditional edges control the execution flow in the SQLAgent graph.",
+      "context": "graph.add_conditional_edges(\n    \"llm\",\n    self.exists_function_calling,\n    {True: \"function\", False: END}\n)\n\n[...]\n\ndef exists_function_calling(self, state: AgentState):\n    result = state['messages'][-1]\n    return len(result.tool_calls) > 0",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "system-prompt-e1",
+      "section": "Single-agent workflow",
+      "question": "How is the system prompt added to messages in the call_llm function?",
+      "context": "def call_llm(self, state: AgentState):\n    messages = state['messages']\n    # adding system prompt if it's defined\n    if self.system_prompt:\n        messages = [SystemMessage(content=self.system_prompt)] + messages\n\n    # calling LLM\n    message = self.model.invoke(messages)\n\n    return {'messages': [message]}",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "agent-prompt-m1",
+      "section": "Single-agent workflow",
+      "question": "What does the system prompt for the SQL documentation agent specify?",
+      "context": "prompt = '''You are a senior expert in SQL and data analysis. So, you can help the team to gather needed data to power their decisions. You are very accurate and take into account all the nuances in data. Your goal is to provide the detailed documentation for the table in database that will help users.'''",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "prebuilt-compare-h1",
+      "section": "Using prebuilt agents",
+      "question": "When would you choose to build a custom agent versus using a prebuilt agent in LangGraph?",
+      "context": "We've learned how to build an agent from scratch. However, we can leverage LangGraph's built-in functionality for simpler tasks like this one.\n\nWe can use a prebuilt ReAct agent to get a similar result: an agent that can work with tools.\n\nfrom langgraph.prebuilt import create_react_agent\nprebuilt_doc_agent = create_react_agent(model, [execute_sql], state_modifier = system_prompt)",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "pygraphviz-e1",
+      "section": "Single-agent workflow",
+      "question": "What command is used to visualize a LangGraph graph?",
+      "context": "from IPython.display import Image\nImage(doc_agent.graph.get_graph().draw_png())",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "cycle-visualization-m1",
+      "section": "Single-agent workflow",
+      "question": "What observation is made about cycles in LangGraph after visualizing the graph?",
+      "context": "As you can see, our graph has cycles. Implementing something like this with LCEL would be quite challenging.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "graph-invoke-e1",
+      "section": "Single-agent workflow",
+      "question": "How do you execute a LangGraph agent with an initial question?",
+      "context": "messages = [HumanMessage(content=\"What info do we have in ecommerce_db.users table?\")]\nresult = doc_agent.graph.invoke({\"messages\": messages})",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "sqlite-persistence-m1",
+      "section": "Persistence and streaming",
+      "question": "How do you initialize an in-memory SQLite database for persistence in LangGraph?",
+      "context": "The easiest way to add persistence is to use an in-memory SQLite database.\n\nfrom langgraph.checkpoint.sqlite import SqliteSaver\nmemory = SqliteSaver.from_conn_string(\":memory:\")",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "thread-config-e1",
+      "section": "Persistence and streaming",
+      "question": "How is a thread defined for use with streaming in LangGraph?",
+      "context": "thread = {\"configurable\": {\"thread_id\": \"1\"}}\nmessages = [HumanMessage(content=\"What info do we have in ecommerce_db.users table?\")]",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "streaming-proc-m1",
+      "section": "Persistence and streaming",
+      "question": "How do you implement streaming with a prebuilt agent in LangGraph?",
+      "context": "for event in prebuilt_doc_agent.stream({\"messages\": messages}, thread):\n    for v in event.values():\n        v['messages'][-1].pretty_print()",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "token-stream-h1",
+      "section": "Persistence and streaming",
+      "question": "Compare event streaming and token-level streaming in LangGraph and their respective use cases.",
+      "context": "With streaming, we can receive results from each step of execution as a separate event in a stream. This feature is crucial for production applications when multiple conversations (or threads) need to be processed simultaneously.\n\nLangGraph supports not only event streaming but also token-level streaming. The only use case I have in mind for token streaming is to display the answers in real-time word by word (similar to ChatGPT implementation).",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "technical"
+    },
+    {
+      "id": "thread-isolation-h1",
+      "section": "Persistence and streaming",
+      "question": "What happens when the same follow-up question is asked using different thread IDs?",
+      "context": "This time, we got the full answer from the agent. Since we provided the same thread, the agent was able to get the context from the previous discussion. That's how persistence works.\n\nLet's try to change the thread and ask the same follow-up question.\n\nnew_thread = {\"configurable\": {\"thread_id\": \"42\"}}\nfollowup_messages = [HumanMessage(content=\"I would like to know the column names and types. Maybe you could look it up in database using describe.\")]\n\nfor event in prebuilt_doc_agent.stream({\"messages\": followup_messages}, new_thread):\n    for v in event.values():\n        v['messages'][-1].pretty_print()\n\nIt was not surprising that the agent lacked the context needed to answer our question. Threads are designed to isolate different conversations, ensuring that each thread maintains its own context.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "memory-manage-m1",
+      "section": "Persistence and streaming",
+      "question": "What techniques are suggested for managing memory in lengthy conversations?",
+      "context": "In real-life applications, managing memory is essential. Conversations might become pretty lengthy, and at some point, it won't be practical to pass the whole history to LLM every time. Therefore, it's worth trimming or filtering messages. We won't go deep into the specifics here, but you can find guidance on it in the LangGraph documentation. Another option to compress the conversational history is using summarization (example).",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-agent-state-e1",
+      "section": "Multi-Agent Systems",
+      "question": "What fields are included in the MultiAgentState for the multi-agent example?",
+      "context": "class MultiAgentState(TypedDict):\n    question: str\n    question_type: str\n    answer: str\n    feedback: str",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "router-prompt-m1",
+      "section": "Multi-Agent Systems",
+      "question": "What instructions are given to the router agent in the system prompt?",
+      "context": "question_category_prompt = '''You are a senior specialist of analytical support. Your task is to classify the incoming questions. Depending on your answer, question will be routed to the right team, so your task is crucial for our team. There are 3 possible question types: - DATABASE - questions related to our database (tables or fields) - LANGCHAIN- questions related to LangGraph or LangChain libraries - GENERAL - general questions Return in the output only one word (DATABASE, LANGCHAIN or GENERAL). '''",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "router-implementation-m1",
+      "section": "Multi-Agent Systems",
+      "question": "How does the router_node function classify the incoming question?",
+      "context": "def router_node(state: MultiAgentState):\n    messages = [\n        SystemMessage(content=question_category_prompt),\n        HumanMessage(content=state['question'])\n    ]\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    response = model.invoke(messages)\n    return {\"question_type\": response.content}",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "multi-agent-graph-h1",
+      "section": "Multi-Agent Systems",
+      "question": "Analyze how the multi-agent graph structure enables specialization and routing of questions.",
+      "context": "builder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\nbuilder.add_edge('database_expert', END)\nbuilder.add_edge('langchain_expert', END)\nbuilder.add_edge('general_assistant', END)\ngraph = builder.compile(checkpointer=memory)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "testing-multi-e1",
+      "section": "Multi-Agent Systems",
+      "question": "How is the multi-agent system tested with a database-related question?",
+      "context": "thread = {\"configurable\": {\"thread_id\": \"2\"}}\nresults = []\nfor s in graph.stream({\n    'question': \"What info do we have in ecommerce_db.users table?\",\n}, thread):\n    print(s)\n    results.append(s)\nprint(results[-1]['database_expert']['answer'])",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "tavily-search-m1",
+      "section": "Multi-Agent Systems",
+      "question": "How is the Tavily search tool configured for the LangChain expert agent?",
+      "context": "from langchain_community.tools.tavily_search import TavilySearchResults\nos.environ[\"TAVILY_API_KEY\"] = 'tvly-...'\ntavily_tool = TavilySearchResults(max_results=5)",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "expert-specialization-h1",
+      "section": "Multi-Agent Systems",
+      "question": "Compare the implementation approaches of the three expert agents in the multi-agent system.",
+      "context": "Next, let's create nodes for our expert agents. We will use the ReAct agent with the SQL tool we previously built as the database agent.\n\n```\n## database expert\n\nsql_expert_system_prompt = ''' You are an expert in SQL, so you can help the team to gather needed data to power their decisions. You are very accurate and take into account all the nuances in data. You use SQL to get the data before answering the question. '''\n\ndef sql_expert_node(state: MultiAgentState):\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    sql_agent = create_react_agent(model, [execute_sql], state_modifier = sql_expert_system_prompt)\n    messages = [HumanMessage(content=state['question'])]\n    result = sql_agent.invoke({\"messages\": messages})\n    return {'answer': result['messages'][-1].content}\n```\n\nFor LangChain-related questions, we will use the ReAct agent. To enable the agent to answer questions about the library, we will equip it with a search engine tool. I chose Tavily for this purpose as it provides the search results optimised for LLM applications.\n\n[...]\n\nFor general questions, we will leverage a simple LLM model without specific tools.\n\n```\n## general model\n\ngeneral_prompt = '''You're a friendly assistant and your goal is to answer general questions. Please, don't provide any unchecked information and just tell that you don't know if you don't have enough info. '''\n\ndef general_assistant_node(state: MultiAgentState):\n    messages = [\n        SystemMessage(content=general_prompt),\n        HumanMessage(content=state['question'])\n    ]\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    response = model.invoke(messages)\n    return {\"answer\": response.content}\n```",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "technical"
+    },
+    {
+      "id": "route-condition-e1",
+      "section": "Multi-Agent Systems",
+      "question": "What does the route_question function return?",
+      "context": "def route_question(state: MultiAgentState):\n    return state['question_type']",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "tavily-integration-m1",
+      "section": "Multi-Agent Systems",
+      "question": "Why was Tavily chosen as the search tool for the LangChain expert agent?",
+      "context": "For LangChain-related questions, we will use the ReAct agent. To enable the agent to answer questions about the library, we will equip it with a search engine tool. I chose Tavily for this purpose as it provides the search results optimised for LLM applications.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "multi-incrementally-h1",
+      "section": "Multi-Agent Systems",
+      "question": "Why is it recommended to build complex graphs incrementally?",
+      "context": "It's working well. I recommend you build complex graphs incrementally and test each step independently. With such an approach, you can ensure that each iteration works expectedly and can save you a significant amount of debugging time.",
+      "difficulty": "hard",
+      "answer_type": "conceptual",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "human-loop-reason-e1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "Why is human-in-the-loop functionality beneficial in the multi-agent system?",
+      "context": "We've done an excellent job creating a tool to answer questions. However, in many cases, it's beneficial to keep a human in the loop to approve proposed actions or provide additional feedback. Let's add a step where we can collect feedback from a human before returning the final result to the user.",
+      "difficulty": "easy",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "dummy-node-m1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "Why is the human_feedback_node implemented as a dummy node that doesn't perform any actions?",
+      "context": "def human_feedback_node(state: MultiAgentState):\n    pass",
+      "difficulty": "medium",
+      "answer_type": "conceptual",
+      "question_type": "technical"
+    },
+    {
+      "id": "editor-prompt-m1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "What instructions are given to the editor model in its system prompt?",
+      "context": "editor_prompt = '''You're an editor and your goal is to provide the final answer to the customer, taking into account the feedback. You don't add any information on your own. You use friendly and professional tone. In the output please provide the final answer to the customer without additional comments. Here's all the information you need.\n\n## Question from customer:\n\n## {question}\n\n## Draft answer:\n\n## {answer}\n\n## Feedback:\n\n## {feedback}\n\n'''",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "interrupt-impl-h1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How is the graph structure modified to support human-in-the-loop interactions with interruption?",
+      "context": "Let's add these nodes to our graph. Additionally, we need to introduce an interruption before the human node to ensure that the process pauses for human feedback.\n\n```\nbuilder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_node('human', human_feedback_node)\nbuilder.add_node('editor', editor_node)\n\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\n\nbuilder.add_edge('database_expert', 'human')\nbuilder.add_edge('langchain_expert', 'human')\nbuilder.add_edge('general_assistant', 'human')\nbuilder.add_edge('human', 'editor')\nbuilder.add_edge('editor', END)\ngraph = builder.compile(checkpointer=memory, interrupt_before = ['human'])\n```\n\nNow, when we run the graph, the execution will be stopped before the human node.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "check-state-e1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How do you check the current state of a LangGraph after interruption?",
+      "context": "We can check the state to confirm that the feedback has been populated and that the next node in the sequence is editor.\n\nprint(graph.get_state(thread).values['feedback'])\nprint(graph.get_state(thread).next)",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "update-state-m1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How do you update the state with human feedback after an interruption?",
+      "context": "Let's get the customer input and update the state with the feedback.\n\nuser_input = input(\"Do I need to change anything in the answer?\")\n\ngraph.update_state(thread, {\"feedback\": user_input}, as_node=\"human\")",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "resume-execution-e1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How do you resume execution after updating the state with human feedback?",
+      "context": "We can just continue the execution. Passing None as input will resume the process from the point where it was paused.\n\nfor event in graph.stream(None, thread, stream_mode=\"values\"):\n    print(event)",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "human-tool-h1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "Compare the two approaches to human-in-the-loop interactions presented in the article.",
+      "context": "Let's update our main graph to incorporate the new agent instead of using the two separate nodes. With this approach, we don't need interruptions any more.\n\ndef editor_agent_node(state: MultiAgentState):\n    model = ChatOpenAI(model=\"gpt-4o-mini\")\n    editor_agent = create_react_agent(model, [human_tool])\n    messages = [SystemMessage(content=editor_agent_prompt.format(question = state['question'], answer = state['answer']))]\n    result = editor_agent.invoke({\"messages\": messages})\n    return {'answer': result['messages'][-1].content}\n\nbuilder = StateGraph(MultiAgentState)\nbuilder.add_node(\"router\", router_node)\nbuilder.add_node('database_expert', sql_expert_node)\nbuilder.add_node('langchain_expert', search_expert_node)\nbuilder.add_node('general_assistant', general_assistant_node)\nbuilder.add_node('editor', editor_agent_node)\n\nbuilder.add_conditional_edges(\n    \"router\", \n    route_question, \n    {'DATABASE': 'database_expert', 'LANGCHAIN': 'langchain_expert', 'GENERAL': 'general_assistant'}\n)\n\nbuilder.set_entry_point(\"router\")\n\nbuilder.add_edge('database_expert', 'editor')\nbuilder.add_edge('langchain_expert', 'editor')\nbuilder.add_edge('general_assistant', 'editor')\nbuilder.add_edge('editor', END)\n\ngraph = builder.compile(checkpointer=memory)\n\nThis graph will work similarly to the previous one. I personally prefer this approach since it leverages tools, making the solution more agile. For example, agents can reach out to humans multiple times and refine questions as needed.",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "human-tool-m1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How is the HumanInputRun tool implemented in the second approach to human-in-the-loop interactions?",
+      "context": "We can implement human-in-the-loop interactions in a more agentic way by equipping our editor with the Human tool.\n\nLet's adjust our editor. I've slightly changed the prompt and added the tool to the agent.\n\n```\nfrom langchain_community.tools import HumanInputRun\nhuman_tool = HumanInputRun()\n\neditor_agent_prompt = '''You're an editor and your goal is to provide the final answer to the customer, taking into the initial question. If you need any clarifications or need feedback, please, use human. Always reach out to human to get the feedback before final answer. You don't add any information on your own. You use friendly and professional tone. In the output please provide the final answer to the customer without additional comments. Here's all the information you need.\n\n## Question from customer:\n\n## {question}\n\n## Draft answer:\n\n## {answer}\n\n'''\n\nmodel = ChatOpenAI(model=\"gpt-4o-mini\")\neditor_agent = create_react_agent(model, [human_tool])\nmessages = [SystemMessage(content=editor_agent_prompt.format(question = state['question'], answer = state['answer']))]\neditor_result = editor_agent.invoke({\"messages\": messages})",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "editor-tool-prompt-h1",
+      "section": "Adding human-in-the-loop interactions",
+      "question": "How does the editor agent prompt change when using the Human tool approach compared to the interrupt approach?",
+      "context": "editor_prompt = '''You're an editor and your goal is to provide the final answer to the customer, taking into account the feedback. You don't add any information on your own. You use friendly and professional tone. In the output please provide the final answer to the customer without additional comments. Here's all the information you need.\n\n## Question from customer:\n\n## {question}\n\n## Draft answer:\n\n## {answer}\n\n## Feedback:\n\n## {feedback}\n\n'''\n\n[...]\n\neditor_agent_prompt = '''You're an editor and your goal is to provide the final answer to the customer, taking into the initial question. If you need any clarifications or need feedback, please, use human. Always reach out to human to get the feedback before final answer. You don't add any information on your own. You use friendly and professional tone. In the output please provide the final answer to the customer without additional comments. Here's all the information you need.\n\n## Question from customer:\n\n## {question}\n\n## Draft answer:\n\n## {answer}\n\n'''",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "technical"
+    },
+    {
+      "id": "strength-low-level-e1",
+      "section": "Summary",
+      "question": "What is one of the main strengths of LangGraph as a framework?",
+      "context": "Overall, I find LangGraph quite a powerful framework for building complex LLM applications:\n\n- LangGraph is a low-level framework that offers extensive customisation options, allowing you to build precisely what you need.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "langchain-integration-m1",
+      "section": "Summary",
+      "question": "What advantage does LangGraph gain from being built on top of LangChain?",
+      "context": "Since LangGraph is built on top of LangChain, it's seamlessly integrated into its ecosystem, making it easy to leverage existing tools and components.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "framework-weakness-m1",
+      "section": "Summary",
+      "question": "What is the main drawback of LangGraph's low-level approach?",
+      "context": "The agility of LangGraph comes with a higher entry barrier. While you can understand the concepts of CrewAI within 15–30 minutes, it takes some time to get comfortable and up to speed with LangGraph.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "missing-features-m1",
+      "section": "Summary",
+      "question": "What prebuilt features does LangGraph miss compared to CrewAI?",
+      "context": "LangGraph provides you with a higher level of control, but it misses some cool prebuilt features of CrewAI, such as collaboration or ready-to-use RAG tools.",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "comparative"
+    },
+    {
+      "id": "best-practices-h1",
+      "section": "Summary",
+      "question": "How do LangGraph and CrewAI differ in their approach to best practices and guardrails?",
+      "context": "LangGraph doesn't enforce best practices like CrewAI does (for example, role-playing or guardrails). So it can lead to poorer results.",
+      "difficulty": "hard",
+      "answer_type": "comparative",
+      "question_type": "comparative"
+    },
+    {
+      "id": "recommendation-h1",
+      "section": "Summary",
+      "question": "What factors should guide the choice between LangGraph and CrewAI according to the article?",
+      "context": "I would say that CrewAI is a better framework for newbies and common use cases because it helps you get good results quickly and provides guidance to prevent mistakes.\n\nIf you want to build an advanced application and need more control, LangGraph is the way to go. Keep in mind that you'll need to invest time in learning LangGraph and should be fully responsible for the final solution, as the framework won't provide guidance to help you avoid common mistakes.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "inspiration-e1",
+      "section": "Reference",
+      "question": "What was the inspiration for this article according to the reference section?",
+      "context": "This article is inspired by the \"AI Agents in LangGraph\" short course from DeepLearning.AI.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "intro-use-case-m1",
+      "section": "Introduction to LangGraph",
+      "question": "What types of applications is LangGraph particularly suited for based on the introduction?",
+      "context": "LangGraph (as you might guess from the name) models all interactions as cyclical graphs. These graphs enable the development of advanced workflows and interactions with multiple loops and if-statements, making it a handy tool for creating both agent and multi-agent workflows.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "openai-model-e1",
+      "section": "Single-agent workflow",
+      "question": "What OpenAI model is used in the examples throughout the article?",
+      "context": "I will use the new OpenAI GPT 4o mini model (doc) since it's cheaper and better performing than GPT 3.5.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    }
+  ]
+}

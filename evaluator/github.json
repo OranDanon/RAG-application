@@ -1,0 +1,859 @@
+{
+  "questions": [
+    {
+      "id": "LG-intro-easy-1",
+      "section": "Introduction",
+      "question": "What is LangGraph described as in the documentation?",
+      "context": "LangGraph — used by Replit, Uber, LinkedIn, GitLab and more — is a low-level orchestration framework for building controllable agents.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-intro-easy-2",
+      "section": "Introduction",
+      "question": "Which companies are mentioned as users of LangGraph in the introduction?",
+      "context": "LangGraph — used by Replit, Uber, LinkedIn, GitLab and more — is a low-level orchestration framework for building controllable agents.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-intro-medium-1",
+      "section": "Introduction",
+      "question": "How does LangGraph differ from langchain in terms of functionality?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-intro-medium-2",
+      "section": "Introduction",
+      "question": "What capabilities does LangGraph offer for handling complex tasks?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-intro-hard-1",
+      "section": "Introduction",
+      "question": "How does LangGraph's orchestration approach contribute to handling complex tasks compared to standard LLM application development?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-install-easy-1",
+      "section": "Installation",
+      "question": "How do you install LangGraph?",
+      "context": "pip install -U langgraph",
+      "difficulty": "easy",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-install-medium-1",
+      "section": "Installation",
+      "question": "What does the '-U' flag mean in the LangGraph installation command?",
+      "context": "pip install -U langgraph",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-easy-1",
+      "section": "Basic Usage Example",
+      "question": "What additional package dependency is needed for the example code to work?",
+      "context": "This code depends on pip install langchain[anthropic]",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-easy-2",
+      "section": "Basic Usage Example",
+      "question": "What function is imported to create a ReAct agent?",
+      "context": "from langgraph.prebuilt import create_react_agent",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-medium-1",
+      "section": "Basic Usage Example",
+      "question": "How is the search tool implemented in the example code?",
+      "context": "def search(query: str): \"\"\"Call to surf the web.\"\"\" if \"sf\" in query.lower() or \"san francisco\" in query.lower(): return \"It's 60 degrees and foggy.\" return \"It's 90 degrees and sunny.\"",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-medium-2",
+      "section": "Basic Usage Example",
+      "question": "What model is used in the ReAct agent example?",
+      "context": "agent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-medium-3",
+      "section": "Basic Usage Example",
+      "question": "How do you create a ReAct agent with tools in LangGraph?",
+      "context": "agent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-hard-1",
+      "section": "Basic Usage Example",
+      "question": "Explain the structure of the message format used when invoking the agent in the example",
+      "context": "agent.invoke( {\"messages\": [{\"role\": \"user\", \"content\": \"what is the weather in sf\"}]} )",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-hard-2",
+      "section": "Basic Usage Example",
+      "question": "How would the search function respond differently if queried about San Francisco versus any other location?",
+      "context": "def search(query: str): \"\"\"Call to surf the web.\"\"\" if \"sf\" in query.lower() or \"san francisco\" in query.lower(): return \"It's 60 degrees and foggy.\" return \"It's 90 degrees and sunny.\"",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-easy-1",
+      "section": "Why Use LangGraph",
+      "question": "Who is LangGraph built for?",
+      "context": "LangGraph is built for developers who want to build powerful, adaptable AI agents.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-why-easy-2",
+      "section": "Why Use LangGraph",
+      "question": "What is one of the main reasons developers choose LangGraph?",
+      "context": "Reliability and controllability. Steer agent actions with moderation checks and human-in-the-loop approvals. LangGraph persists context for long-running workflows, keeping your agents on course.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-why-medium-1",
+      "section": "Why Use LangGraph",
+      "question": "How does LangGraph help with agent reliability and controllability?",
+      "context": "Reliability and controllability. Steer agent actions with moderation checks and human-in-the-loop approvals. LangGraph persists context for long-running workflows, keeping your agents on course.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-why-medium-2",
+      "section": "Why Use LangGraph",
+      "question": "What does it mean that LangGraph is 'low-level and extensible'?",
+      "context": "Low-level and extensible. Build custom agents with fully descriptive, low-level primitives – free from rigid abstractions that limit customization. Design scalable multi-agent systems, with each agent serving a specific role tailored to your use case.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-why-medium-3",
+      "section": "Why Use LangGraph",
+      "question": "What streaming capabilities does LangGraph offer?",
+      "context": "First-class streaming support. With token-by-token streaming and streaming of intermediate steps, LangGraph gives users clear visibility into agent reasoning and actions as they unfold in real time.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-hard-1",
+      "section": "Why Use LangGraph",
+      "question": "How does LangGraph's streaming support enhance the user experience compared to non-streaming agent frameworks?",
+      "context": "First-class streaming support. With token-by-token streaming and streaming of intermediate steps, LangGraph gives users clear visibility into agent reasoning and actions as they unfold in real time.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-why-hard-2",
+      "section": "Why Use LangGraph",
+      "question": "How might LangGraph's support for multi-agent systems benefit complex use cases compared to single-agent approaches?",
+      "context": "Low-level and extensible. Build custom agents with fully descriptive, low-level primitives – free from rigid abstractions that limit customization. Design scalable multi-agent systems, with each agent serving a specific role tailored to your use case.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-why-easy-3",
+      "section": "Why Use LangGraph",
+      "question": "Which company uses LangGraph for customer support?",
+      "context": "Klarna: Customer support bot for 85 million active users",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-why-easy-4",
+      "section": "Why Use LangGraph",
+      "question": "How many active users does Klarna's customer support bot serve?",
+      "context": "Klarna: Customer support bot for 85 million active users",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-why-easy-5",
+      "section": "Why Use LangGraph",
+      "question": "Which company uses LangGraph for security threat detection?",
+      "context": "Elastic: Security AI assistant for threat detection",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-why-easy-6",
+      "section": "Why Use LangGraph",
+      "question": "What does Uber use LangGraph for?",
+      "context": "Uber: Automated unit test generation",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-why-easy-7",
+      "section": "Why Use LangGraph",
+      "question": "What does Replit use LangGraph for?",
+      "context": "Replit: Code generation",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-why-medium-4",
+      "section": "Why Use LangGraph",
+      "question": "List three companies that use LangGraph in production and their respective use cases.",
+      "context": "Klarna: Customer support bot for 85 million active users\n\nElastic: Security AI assistant for threat detection\n\nUber: Automated unit test generation\n\nReplit: Code generation",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-why-medium-5",
+      "section": "Why Use LangGraph",
+      "question": "How can LangGraph help with building multi-agent systems?",
+      "context": "Low-level and extensible. Build custom agents with fully descriptive, low-level primitives – free from rigid abstractions that limit customization. Design scalable multi-agent systems, with each agent serving a specific role tailored to your use case.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-hard-3",
+      "section": "Why Use LangGraph",
+      "question": "Based on the production examples, what types of applications is LangGraph particularly well-suited for?",
+      "context": "Klarna: Customer support bot for 85 million active users\n\nElastic: Security AI assistant for threat detection\n\nUber: Automated unit test generation\n\nReplit: Code generation",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-eco-easy-1",
+      "section": "LangGraph Ecosystem",
+      "question": "Can LangGraph be used as a standalone tool?",
+      "context": "While LangGraph can be used standalone, it also integrates seamlessly with any LangChain product, giving developers a full suite of tools for building agents.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-eco-easy-2",
+      "section": "LangGraph Ecosystem",
+      "question": "What is LangSmith used for in the LangGraph ecosystem?",
+      "context": "LangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-eco-medium-1",
+      "section": "LangGraph Ecosystem",
+      "question": "How does LangSmith complement LangGraph in the development lifecycle?",
+      "context": "LangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-eco-medium-2",
+      "section": "LangGraph Ecosystem",
+      "question": "What is the purpose of LangGraph Platform in the ecosystem?",
+      "context": "LangGraph Platform — Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in LangGraph Studio.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-eco-hard-1",
+      "section": "LangGraph Ecosystem",
+      "question": "How do the three components (LangGraph, LangSmith, and LangGraph Platform) work together to support the full agent development lifecycle?",
+      "context": "While LangGraph can be used standalone, it also integrates seamlessly with any LangChain product, giving developers a full suite of tools for building agents. To improve your LLM application development, pair LangGraph with:\n\nLangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.\n\nLangGraph Platform — Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in LangGraph Studio.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-platform-easy-1",
+      "section": "LangGraph Platform",
+      "question": "Who is LangGraph Platform designed for?",
+      "context": "While LangGraph is our open-source agent orchestration framework, enterprises that need scalable agent deployment can benefit from LangGraph Platform.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-platform-easy-2",
+      "section": "LangGraph Platform",
+      "question": "What is LangGraph Studio used for?",
+      "context": "Accelerate agent development: Quickly create agent UXs with configurable templates and LangGraph Studio for visualizing and debugging agent interactions.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-platform-medium-1",
+      "section": "LangGraph Platform",
+      "question": "How does LangGraph Platform help with agent deployment?",
+      "context": "Deploy seamlessly: We handle the complexity of deploying your agent. LangGraph Platform includes robust APIs for memory, threads, and cron jobs plus auto-scaling task queues & servers.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-platform-medium-2",
+      "section": "LangGraph Platform",
+      "question": "What agent management capabilities does LangGraph Platform provide?",
+      "context": "Centralize agent management & reusability: Discover, reuse, and manage agents across the organization. Business users can also modify agents without coding.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-platform-hard-1",
+      "section": "LangGraph Platform",
+      "question": "How does LangGraph Platform enable non-technical business users to work with agents?",
+      "context": "Centralize agent management & reusability: Discover, reuse, and manage agents across the organization. Business users can also modify agents without coding.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-platform-hard-2",
+      "section": "LangGraph Platform",
+      "question": "What advantages does LangGraph Platform offer for enterprise deployment compared to self-hosting the open-source version?",
+      "context": "While LangGraph is our open-source agent orchestration framework, enterprises that need scalable agent deployment can benefit from LangGraph Platform.\n\nLangGraph Platform can help engineering teams:\n\nAccelerate agent development: Quickly create agent UXs with configurable templates and LangGraph Studio for visualizing and debugging agent interactions.\n\nDeploy seamlessly: We handle the complexity of deploying your agent. LangGraph Platform includes robust APIs for memory, threads, and cron jobs plus auto-scaling task queues & servers.\n\nCentralize agent management & reusability: Discover, reuse, and manage agents across the organization. Business users can also modify agents without coding.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-resources-easy-1",
+      "section": "Additional Resources",
+      "question": "Where can you learn the basics of LangGraph for free?",
+      "context": "LangChain Academy: Learn the basics of LangGraph in our free, structured course.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-resources-easy-2",
+      "section": "Additional Resources",
+      "question": "What do the LangGraph tutorials provide?",
+      "context": "Tutorials: Simple walkthroughs with guided examples on getting started with LangGraph.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-resources-medium-1",
+      "section": "Additional Resources",
+      "question": "What types of pre-built reference apps are available as LangGraph templates?",
+      "context": "Templates: Pre-built reference apps for common agentic workflows (e.g. ReAct agent, memory, retrieval etc.) that can be cloned and adapted.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-resources-medium-2",
+      "section": "Additional Resources",
+      "question": "What topics do the LangGraph How-to Guides cover?",
+      "context": "How-to Guides: Quick, actionable code snippets for topics such as streaming, adding memory & persistence, and design patterns (e.g. branching, subgraphs, etc.).",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-resources-hard-1",
+      "section": "Additional Resources",
+      "question": "How do the different educational resources for LangGraph (Academy, Tutorials, Templates, How-to Guides, and API Reference) complement each other for different learning needs?",
+      "context": "LangChain Academy: Learn the basics of LangGraph in our free, structured course.\n\nTutorials: Simple walkthroughs with guided examples on getting started with LangGraph.\n\nTemplates: Pre-built reference apps for common agentic workflows (e.g. ReAct agent, memory, retrieval etc.) that can be cloned and adapted.\n\nHow-to Guides: Quick, actionable code snippets for topics such as streaming, adding memory & persistence, and design patterns (e.g. branching, subgraphs, etc.).\n\nAPI Reference: Detailed reference on core classes, methods, how to use the graph and checkpointing APIs, and higher-level prebuilt components.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-ack-easy-1",
+      "section": "Acknowledgements",
+      "question": "What frameworks inspired LangGraph?",
+      "context": "LangGraph is inspired by Pregel and Apache Beam. The public interface draws inspiration from NetworkX.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-ack-easy-2",
+      "section": "Acknowledgements",
+      "question": "Who built LangGraph?",
+      "context": "LangGraph is built by LangChain Inc, the creators of LangChain, but can be used without LangChain.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-ack-medium-1",
+      "section": "Acknowledgements",
+      "question": "What is the relationship between LangGraph and LangChain?",
+      "context": "LangGraph is built by LangChain Inc, the creators of LangChain, but can be used without LangChain.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-intro-easy-3",
+      "section": "Introduction",
+      "question": "What is the relationship between LangGraph and agent orchestration?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-intro-medium-3",
+      "section": "Introduction",
+      "question": "What are the three key features of LangGraph mentioned in the introduction?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-intro-hard-2",
+      "section": "Introduction",
+      "question": "How might 'human-in-the-loop' functionality change the development approach for AI agents?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-usage-easy-3",
+      "section": "Basic Usage Example",
+      "question": "In the example code, what is the purpose of the search function?",
+      "context": "def search(query: str): \"\"\"Call to surf the web.\"\"\" if \"sf\" in query.lower() or \"san francisco\" in query.lower(): return \"It's 60 degrees and foggy.\" return \"It's 90 degrees and sunny.\"",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-easy-4",
+      "section": "Basic Usage Example",
+      "question": "How is the search function passed to the ReAct agent?",
+      "context": "agent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-medium-4",
+      "section": "Basic Usage Example",
+      "question": "What is the structure of the input passed to the agent's invoke method?",
+      "context": "agent.invoke( {\"messages\": [{\"role\": \"user\", \"content\": \"what is the weather in sf\"}]} )",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-medium-5",
+      "section": "Basic Usage Example",
+      "question": "How would you modify the example code to add another tool alongside the search function?",
+      "context": "agent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-usage-hard-3",
+      "section": "Basic Usage Example",
+      "question": "What design pattern does the example code demonstrate for integrating tools with a language model?",
+      "context": "def search(query: str): \"\"\"Call to surf the web.\"\"\"\nif \"sf\" in query.lower() or \"san francisco\" in query.lower():\n    return \"It's 60 degrees and foggy.\"\nreturn \"It's 90 degrees and sunny.\"\n\nagent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])\nagent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"what is the weather in sf\"}]}\n)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-usage-hard-4",
+      "section": "Basic Usage Example",
+      "question": "Compare and contrast the ReAct agent pattern shown in the example with other potential agent architectures",
+      "context": "from langgraph.prebuilt import create_react_agent\n\ndef search(query: str): \"\"\"Call to surf the web.\"\"\"\nif \"sf\" in query.lower() or \"san francisco\" in query.lower():\n    return \"It's 60 degrees and foggy.\"\nreturn \"It's 90 degrees and sunny.\"\n\nagent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])\nagent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"what is the weather in sf\"}]}\n)",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-why-easy-8",
+      "section": "Why Use LangGraph",
+      "question": "What visibility does LangGraph's streaming support provide to users?",
+      "context": "First-class streaming support. With token-by-token streaming and streaming of intermediate steps, LangGraph gives users clear visibility into agent reasoning and actions as they unfold in real time.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-easy-9",
+      "section": "Why Use LangGraph",
+      "question": "What context maintenance feature does LangGraph provide for workflows?",
+      "context": "Reliability and controllability. Steer agent actions with moderation checks and human-in-the-loop approvals. LangGraph persists context for long-running workflows, keeping your agents on course.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-medium-6",
+      "section": "Why Use LangGraph",
+      "question": "How does LangGraph enable human-in-the-loop workflows?",
+      "context": "Reliability and controllability. Steer agent actions with moderation checks and human-in-the-loop approvals. LangGraph persists context for long-running workflows, keeping your agents on course.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-medium-7",
+      "section": "Why Use LangGraph",
+      "question": "What specific streaming features does LangGraph offer for monitoring agent execution?",
+      "context": "First-class streaming support. With token-by-token streaming and streaming of intermediate steps, LangGraph gives users clear visibility into agent reasoning and actions as they unfold in real time.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-why-hard-4",
+      "section": "Why Use LangGraph",
+      "question": "How do LangGraph's low-level primitives enable greater customization compared to more rigid frameworks?",
+      "context": "Low-level and extensible. Build custom agents with fully descriptive, low-level primitives – free from rigid abstractions that limit customization. Design scalable multi-agent systems, with each agent serving a specific role tailored to your use case.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-why-hard-5",
+      "section": "Why Use LangGraph",
+      "question": "What architectural advantages does LangGraph provide for complex, multi-agent systems?",
+      "context": "Low-level and extensible. Build custom agents with fully descriptive, low-level primitives – free from rigid abstractions that limit customization. Design scalable multi-agent systems, with each agent serving a specific role tailored to your use case.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-why-medium-8",
+      "section": "Why Use LangGraph",
+      "question": "Describe a practical use case where LangGraph's context persistence would be beneficial",
+      "context": "Reliability and controllability. Steer agent actions with moderation checks and human-in-the-loop approvals. LangGraph persists context for long-running workflows, keeping your agents on course.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-why-hard-6",
+      "section": "Why Use LangGraph",
+      "question": "How would you implement moderation checks for agent actions using LangGraph?",
+      "context": "Reliability and controllability. Steer agent actions with moderation checks and human-in-the-loop approvals. LangGraph persists context for long-running workflows, keeping your agents on course.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-enterprise-easy-1",
+      "section": "Why Use LangGraph",
+      "question": "Which company is mentioned as using LangGraph for a security AI assistant?",
+      "context": "Elastic: Security AI assistant for threat detection",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-enterprise-medium-1",
+      "section": "Why Use LangGraph",
+      "question": "How do the enterprise use cases of LangGraph mentioned in the document differ from each other?",
+      "context": "Klarna: Customer support bot for 85 million active users\n\nElastic: Security AI assistant for threat detection\n\nUber: Automated unit test generation\n\nReplit: Code generation",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-enterprise-hard-1",
+      "section": "Why Use LangGraph",
+      "question": "Based on the enterprise examples, explain how LangGraph might handle different agent orchestration requirements across various domains",
+      "context": "Klarna: Customer support bot for 85 million active users\n\nElastic: Security AI assistant for threat detection\n\nUber: Automated unit test generation\n\nReplit: Code generation",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-eco-easy-3",
+      "section": "LangGraph Ecosystem",
+      "question": "What product enables visual prototyping in the LangGraph ecosystem?",
+      "context": "LangGraph Platform — Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in LangGraph Studio.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-eco-easy-4",
+      "section": "LangGraph Ecosystem",
+      "question": "What can LangSmith be used to debug?",
+      "context": "LangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-eco-medium-3",
+      "section": "LangGraph Ecosystem",
+      "question": "How does LangSmith help developers improve their LLM applications over time?",
+      "context": "LangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-eco-medium-4",
+      "section": "LangGraph Ecosystem",
+      "question": "What capabilities does LangGraph Platform provide for long-running workflows?",
+      "context": "LangGraph Platform — Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in LangGraph Studio.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-eco-hard-2",
+      "section": "LangGraph Ecosystem",
+      "question": "How would you use the combination of LangGraph and LangSmith to troubleshoot a poorly performing agent?",
+      "context": "LangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-eco-hard-3",
+      "section": "LangGraph Ecosystem",
+      "question": "What advantages does the integrated LangGraph ecosystem provide compared to using separate tools for each part of the agent development lifecycle?",
+      "context": "While LangGraph can be used standalone, it also integrates seamlessly with any LangChain product, giving developers a full suite of tools for building agents. To improve your LLM application development, pair LangGraph with:\n\nLangSmith — Helpful for agent evals and observability. Debug poor-performing LLM app runs, evaluate agent trajectories, gain visibility in production, and improve performance over time.\n\nLangGraph Platform — Deploy and scale agents effortlessly with a purpose-built deployment platform for long running, stateful workflows. Discover, reuse, configure, and share agents across teams — and iterate quickly with visual prototyping in LangGraph Studio.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "comparative"
+    },
+    {
+      "id": "LG-platform-easy-3",
+      "section": "LangGraph Platform",
+      "question": "What type of users can modify agents in LangGraph Platform?",
+      "context": "Centralize agent management & reusability: Discover, reuse, and manage agents across the organization. Business users can also modify agents without coding.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-platform-easy-4",
+      "section": "LangGraph Platform",
+      "question": "What does LangGraph Platform handle with regard to agent deployment?",
+      "context": "Deploy seamlessly: We handle the complexity of deploying your agent. LangGraph Platform includes robust APIs for memory, threads, and cron jobs plus auto-scaling task queues & servers.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-platform-medium-3",
+      "section": "LangGraph Platform",
+      "question": "What APIs does LangGraph Platform provide for agent functionality?",
+      "context": "Deploy seamlessly: We handle the complexity of deploying your agent. LangGraph Platform includes robust APIs for memory, threads, and cron jobs plus auto-scaling task queues & servers.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-platform-medium-4",
+      "section": "LangGraph Platform",
+      "question": "How does LangGraph Platform assist with agent development acceleration?",
+      "context": "Accelerate agent development: Quickly create agent UXs with configurable templates and LangGraph Studio for visualizing and debugging agent interactions.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-platform-hard-3",
+      "section": "LangGraph Platform",
+      "question": "How would you implement scheduled agent tasks using LangGraph Platform?",
+      "context": "Deploy seamlessly: We handle the complexity of deploying your agent. LangGraph Platform includes robust APIs for memory, threads, and cron jobs plus auto-scaling task queues & servers.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-platform-hard-4",
+      "section": "LangGraph Platform",
+      "question": "Design an approach for organization-wide agent reusability using LangGraph Platform's capabilities",
+      "context": "Centralize agent management & reusability: Discover, reuse, and manage agents across the organization. Business users can also modify agents without coding.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-resources-easy-3",
+      "section": "Additional Resources",
+      "question": "What is the purpose of LangGraph Templates?",
+      "context": "Templates: Pre-built reference apps for common agentic workflows (e.g. ReAct agent, memory, retrieval etc.) that can be cloned and adapted.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-resources-easy-4",
+      "section": "Additional Resources",
+      "question": "What type of code snippets do the How-to Guides provide?",
+      "context": "How-to Guides: Quick, actionable code snippets for topics such as streaming, adding memory & persistence, and design patterns (e.g. branching, subgraphs, etc.).",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "factoid"
+    },
+    {
+      "id": "LG-resources-medium-3",
+      "section": "Additional Resources",
+      "question": "What design patterns are mentioned in the How-to Guides section?",
+      "context": "How-to Guides: Quick, actionable code snippets for topics such as streaming, adding memory & persistence, and design patterns (e.g. branching, subgraphs, etc.).",
+      "difficulty": "medium",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-resources-medium-4",
+      "section": "Additional Resources",
+      "question": "How would you use the API Reference to understand LangGraph's core functionality?",
+      "context": "API Reference: Detailed reference on core classes, methods, how to use the graph and checkpointing APIs, and higher-level prebuilt components.",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-resources-hard-2",
+      "section": "Additional Resources",
+      "question": "What learning path would you design for a team new to LangGraph using the available resources?",
+      "context": "LangChain Academy: Learn the basics of LangGraph in our free, structured course.\n\nTutorials: Simple walkthroughs with guided examples on getting started with LangGraph.\n\nTemplates: Pre-built reference apps for common agentic workflows (e.g. ReAct agent, memory, retrieval etc.) that can be cloned and adapted.\n\nHow-to Guides: Quick, actionable code snippets for topics such as streaming, adding memory & persistence, and design patterns (e.g. branching, subgraphs, etc.).\n\nAPI Reference: Detailed reference on core classes, methods, how to use the graph and checkpointing APIs, and higher-level prebuilt components.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-resources-hard-3",
+      "section": "Additional Resources",
+      "question": "How might the 'Built with LangGraph' resources help inform architectural decisions for new LangGraph projects?",
+      "context": "Built with LangGraph: Hear how industry leaders use LangGraph to ship powerful, production-ready AI applications.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-ack-medium-2",
+      "section": "Acknowledgements",
+      "question": "How does the inspiration from NetworkX influence LangGraph's design?",
+      "context": "LangGraph is inspired by Pregel and Apache Beam. The public interface draws inspiration from NetworkX. LangGraph is built by LangChain Inc, the creators of LangChain, but can be used without LangChain.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-ack-medium-3",
+      "section": "Acknowledgements",
+      "question": "What is the significance of LangGraph being inspired by Pregel and Apache Beam?",
+      "context": "LangGraph is inspired by Pregel and Apache Beam. The public interface draws inspiration from NetworkX. LangGraph is built by LangChain Inc, the creators of LangChain, but can be used without LangChain.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-ack-hard-1",
+      "section": "Acknowledgements",
+      "question": "How might LangGraph's inspiration from Pregel and Apache Beam influence its approach to processing workflows?",
+      "context": "LangGraph is inspired by Pregel and Apache Beam. The public interface draws inspiration from NetworkX. LangGraph is built by LangChain Inc, the creators of LangChain, but can be used without LangChain.",
+      "difficulty": "hard",
+      "answer_type": "descriptive",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-arch-easy-1",
+      "section": "Introduction",
+      "question": "What type of tasks is LangGraph designed to handle?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "conceptual"
+    },
+    {
+      "id": "LG-arch-medium-1",
+      "section": "Introduction",
+      "question": "Explain how LangGraph enables customizable agent architectures",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "medium",
+      "answer_type": "descriptive",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-arch-hard-1",
+      "section": "Introduction",
+      "question": "How would you implement a long-term memory system for agents using LangGraph?",
+      "context": "While langchain provides integrations and composable components to streamline LLM application development, the LangGraph library enables agent orchestration — offering customizable architectures, long-term memory, and human-in-the-loop to reliably handle complex tasks.",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-impl-easy-1",
+      "section": "Basic Usage Example",
+      "question": "What is the purpose of the create_react_agent function?",
+      "context": "from langgraph.prebuilt import create_react_agent",
+      "difficulty": "easy",
+      "answer_type": "factoid",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-impl-medium-1",
+      "section": "Basic Usage Example",
+      "question": "How would you modify the search function to handle additional location queries?",
+      "context": "def search(query: str): \"\"\"Call to surf the web.\"\"\"\nif \"sf\" in query.lower() or \"san francisco\" in query.lower():\n    return \"It's 60 degrees and foggy.\"\nreturn \"It's 90 degrees and sunny.\"",
+      "difficulty": "medium",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    },
+    {
+      "id": "LG-impl-hard-1",
+      "section": "Basic Usage Example",
+      "question": "Design a more complex agent that uses multiple tools and maintains conversation context",
+      "context": "from langgraph.prebuilt import create_react_agent\n\ndef search(query: str): \"\"\"Call to surf the web.\"\"\"\nif \"sf\" in query.lower() or \"san francisco\" in query.lower():\n    return \"It's 60 degrees and foggy.\"\nreturn \"It's 90 degrees and sunny.\"\n\nagent = create_react_agent(\"anthropic:claude-3-7-sonnet-latest\", tools=[search])\nagent.invoke(\n    {\"messages\": [{\"role\": \"user\", \"content\": \"what is the weather in sf\"}]}\n)",
+      "difficulty": "hard",
+      "answer_type": "procedural",
+      "question_type": "technical"
+    }
+  ]
+}

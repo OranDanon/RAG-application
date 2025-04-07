@@ -1,0 +1,11 @@
+requests
+ipykernel
+python-dotenv
+openai
+pydantic
+docling
+lancedb
+streamlit
+tiktoken
+sentence-transformers
+matplotlib
