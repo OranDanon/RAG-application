@@ -62,8 +62,8 @@ User Query → Query Embedding → Similarity Search → Context Retrieval → A
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/langgraph-rag.git
-cd langgraph-rag
+git clone https://github.com/OranDanon/RAG-application.git
+cd RAG-application
 ```
 
 2. Install dependencies:
